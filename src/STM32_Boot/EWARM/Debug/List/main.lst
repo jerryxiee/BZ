@@ -1,0 +1,350 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.10.2.52244/W32 for ARM     04/Dec/2013  10:58:06 #
+# Copyright 1999-2010 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\src\main.c                               #
+#    Command line =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\src\main.c -D STM32F10X_CL -D            #
+#                    USE_STDPERIPH_DRIVER -lcN D:\work\行标产品\改进版一体机\ #
+#                    源程序\改进型EGS701-1\改进型EGS701-1\STM32F2xx_Boot_V1.6 #
+#                    2\STM32F2xx_Boot_130815_IAR6.1\STM32_Boot\EWARM\Debug\Li #
+#                    st\ -lb D:\work\行标产品\改进版一体机\源程序\改进型EGS70 #
+#                    1-1\改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_1 #
+#                    30815_IAR6.1\STM32_Boot\EWARM\Debug\List\ -o             #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\Obj\ --no_cse --no_unroll    #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --warnings_are_errors --fpu=None --dlib_config        #
+#                    E:\SoftwareInstall\arm\INC\c\DLib_Config_Normal.h -I     #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\inc\ -I                         #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\CMSIS\CM3\CoreSupport\ -I       #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\STM32F2xx_StdPeriph_Driver\inc\ #
+#                     -I D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\ #
+#                    改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_13081 #
+#                    5_IAR6.1\STM32_Boot\EWARM\..\CMSIS\CM3\DeviceSupport\ST\ #
+#                    STM32F2xx\ -On --use_c++_inline                          #
+#    List file    =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\main.lst                #
+#    Object file  =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\Obj\main.o                   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IAR6.1\STM32_Boot\src\main.c
+      1          /*****************************************************************************
+      2          *
+      3          * Copyright (c) 2011,深圳市伊爱高新技术开发有限公司
+      4          * All rights reserved.
+      5          *
+      6          * 文件名称 : main.c
+      7          * 功能     :  主功能函数；上电启动时判断是否需要升级需求、程序Updata及boot
+      8                         功能
+      9          *
+     10          * 当前版本 : 1.0
+     11          * 开发者   : wangj
+     12          * 修改时间 : 2011年6月20日
+     13          *
+     14          * 历史版本 :
+     15          * 开发者   :									
+     16          * 完成时间 :
+     17          *
+     18          * 备注 :
+     19          *******************************************************************************/
+     20          /* Includes ------------------------------------------------------------------*/
+     21          #include "config.h"
+     22          #include "stm32f2xx_lib.h"
+     23          #include "memery.h"
+     24          #include "misc.h"
+     25          /* Exported types ------------------------------------------------------------*/
+     26          typedef  void (*pFunction)(void);
+     27          /* Private define ------------------------------------------------------------*/
+     28          /*应用程序地址*/
+     29          #define  ApplicationAddress    0x08004000
+     30          #define	FLASH_UPDATE_START_SECTOR		67//程序升级固件存储区域
+     31          #define FLASH_UPDATE_END_SECTOR			223//640K byte
+     32          
+     33          #define EEPROM_PRAM_BASE_ADDR  10
+     34          //参数的起始地址
+     35          #define E2_PROGRAM_UPDATA_REQUEST_ID_ADDR		(EEPROM_PRAM_BASE_ADDR+725)
+     36          //消息ID0x0202，自定义，程序升级请求标志
+     37          #define E2_PROGRAM_UPDATA_VERIFYCODE_ID_ADDR	(EEPROM_PRAM_BASE_ADDR+730)
+     38          //消息ID0x0203，自定义，程序升级校验码
+     39          #define E2_PROGRAM_UPDATA_LENGTH_ID_ADDR		(EEPROM_PRAM_BASE_ADDR+735)
+     40          //消息ID0x0204，自定义，程序升级长度
+     41          
+     42          /* Private macro -----------------------------------------------------------*/
+     43          /* Private variables ---------------------------------------------------------*/
+     44          pFunction Jump_To_Application;
+     45          uint32_t JumpAddress;
+     46          
+     47          u8 ReceiveDataBuf[550];
+     48          u8 ucTmp[20];
+     49          
+     50          /* Private functions ---------------------------------------------------------*/
+     51          /*
+     52          static void Delay_Cnt(__IO uint32_t nCount)
+     53          {
+     54            for (; nCount != 0; nCount--);
+     55          }
+     56          */
+     57          void NVIC_Configuration(void);
+     58          /*******************************************************************************
+     59          * Function Name  : main
+     60          * Description    : Main program.
+     61          * Input          : None
+     62          * Output         : None
+     63          * Return         : None
+     64          *******************************************************************************/
+     65          static u32 ulLen = 0;
+     66          static u16 rdPage = 0;
+     67          static u8 temp[6] = {0};
+     68          	//u32	length = 189886;
+     69          	
+     70          static u32 temp2 = 0;
+     71          static u32 i = 0;
+     72          	
+     73          
+     74          int main(void)
+     75          {
+     76          	u8	BootPramCheckFlag = 0;//升级参数检查,1为参数错误,0为参数正确
+     77          	u8	BootPramCheckSum = 0;//升级参数校验和
+     78          	
+     79          	if(0 == BootPramCheckFlag)
+     80          	{
+     81          	
+     82          	}
+     83          	if(0 == ulLen)
+     84          	{
+     85          	
+     86          	}
+     87          	if(0 == rdPage)
+     88          	{
+     89          	
+     90          	}
+     91          	
+     92          	for(i=0; i<100000; i++)
+     93          	{
+     94          		//延时一段时间
+     95          	}
+     96          	E2prom_InitIO();
+     97                  
+     98                  sFLASH_DeInit();
+     99          	sFLASH_Init();
+    100          	SPI_FLASH_AllUnprotect();
+    101                  
+    102          	for(i=0; i<100000; i++)
+    103          	{
+    104          		//延时一段时间
+    105          	}
+    106          	E2prom_ReadByte(E2_PROGRAM_UPDATA_REQUEST_ID_ADDR,&temp[0], 2);
+    107          	if((temp[0] != temp[1])||(0xaa != temp[0]))
+    108          	{
+    109          		BootPramCheckFlag = 1;
+    110          	}
+    111          	E2prom_ReadByte(E2_PROGRAM_UPDATA_LENGTH_ID_ADDR, &temp[0], 5);
+    112          	BootPramCheckSum = 0;
+    113          	for(i=0; i<4; i++)
+    114          	{
+    115          		BootPramCheckSum += temp[i];
+    116          	}
+    117          	if(BootPramCheckSum != temp[4])
+    118          	{
+    119          		BootPramCheckFlag = 1;
+    120          		ulLen = 0;
+    121          	}
+    122          	else
+    123          	{
+    124          		ulLen = (temp[0] << 24) + (temp[1] << 16) + (temp[2] << 8) + temp[3];
+    125          	}
+    126          	
+    127          	if((0 == BootPramCheckFlag)
+    128          	   &&(ulLen != 0)
+    129          	   &&(ulLen < 0x80000)) 
+    130          	{
+    131          		
+    132          		sFLASH_Init();
+    133          		FLASH_Unlock();
+    134          	
+    135          		//擦除所需扇区
+    136          		FLASH_EraseSector(FLASH_Sector_1, VoltageRange_3);
+    137          		FLASH_EraseSector(FLASH_Sector_2, VoltageRange_3);
+    138          		FLASH_EraseSector(FLASH_Sector_3, VoltageRange_3);
+    139          		FLASH_EraseSector(FLASH_Sector_4, VoltageRange_3);
+    140          		FLASH_EraseSector(FLASH_Sector_5, VoltageRange_3);
+    141          		FLASH_EraseSector(FLASH_Sector_6, VoltageRange_3);
+    142          		FLASH_EraseSector(FLASH_Sector_7, VoltageRange_3);
+    143          		FLASH_EraseSector(FLASH_Sector_8, VoltageRange_3);
+    144          		FLASH_EraseSector(FLASH_Sector_9, VoltageRange_3);
+    145          		FLASH_EraseSector(FLASH_Sector_10, VoltageRange_3);
+    146          		FLASH_EraseSector(FLASH_Sector_11, VoltageRange_3);
+    147          		
+    148          		while (ulLen > 0) {
+    149          			if (ulLen >= 512) {
+    150          				sFLASH_ReadBuffer(ReceiveDataBuf, (FLASH_UPDATE_START_SECTOR * SECTOR_SIZE) + (rdPage*512), 512);
+    151          				ulLen -= 512;	
+    152          				WriteToMemory(ApplicationAddress + (rdPage*512), ReceiveDataBuf, 512);
+    153          				rdPage++;
+    154          			} else {
+    155          				sFLASH_ReadBuffer(ReceiveDataBuf, (FLASH_UPDATE_START_SECTOR *SECTOR_SIZE) + (rdPage*512), ulLen);
+    156          				WriteToMemory(ApplicationAddress + (rdPage*512), ReceiveDataBuf, ulLen);
+    157          				ulLen = 0;
+    158          			}
+    159          		}
+    160          		temp[0] = 0xbb;
+    161          		E2prom_WriteByte(E2_PROGRAM_UPDATA_REQUEST_ID_ADDR, temp[0]);
+    162          		E2prom_WriteByte(E2_PROGRAM_UPDATA_REQUEST_ID_ADDR+1, temp[0]);
+    163          
+    164          		temp2 = *(__IO uint32_t*)ApplicationAddress;
+    165          		if (( temp2& 0xFF000000 ) == 0x20000000) 
+    166          		{
+    167          		// Jump to user application 
+    168          		JumpAddress = *(__IO uint32_t*) (ApplicationAddress + 4);
+    169          		Jump_To_Application = (pFunction) JumpAddress;
+    170          		// Initialize user application's Stack Pointer 
+    171          		__set_MSP(*(__IO uint32_t*) ApplicationAddress);
+    172          		Jump_To_Application();
+    173          		}
+    174          		else
+    175          		{
+    176          			//temp[0] = 0xaa;//再升一遍
+    177          			//temp[0] = 0xbb;
+    178          			//E2prom_WriteByte(E2_PROGRAM_UPDATA_REQUEST_ID_ADDR, temp[0]);
+    179          			//E2prom_WriteByte(E2_PROGRAM_UPDATA_REQUEST_ID_ADDR+1, temp[0]);
+    180          			
+    181          		}
+    182          	} 
+    183          	else 
+    184          	{
+    185          		
+    186          		// Test if user code is programmed starting from address "ApplicationAddress" 
+    187          		temp2 = *(__IO uint32_t*)ApplicationAddress;
+    188          		if (( temp2& 0xFF000000 ) == 0x20000000) 
+    189          		{
+    190                		// Jump to user application 
+    191          			JumpAddress = *(__IO uint32_t*) (ApplicationAddress + 4);
+    192          			Jump_To_Application = (pFunction) JumpAddress;
+    193          			// Initialize user application's Stack Pointer 
+    194          			__set_MSP(*(__IO uint32_t*) ApplicationAddress);
+    195          			Jump_To_Application();
+    196          		}
+    197          	}
+    198          	
+    199          	/* fail:  */
+    200          	while (1){	
+    201          		
+    202          		NVIC_SystemReset();
+    203          	}
+    204          }
+    205          /*******************************************************************************
+    206          * Function Name  : NVIC_Configuration
+    207          * Description    : Configures the nested vectored interrupt controller.
+    208          * Input          : None
+    209          * Output         : None
+    210          * Return         : None
+    211          *******************************************************************************/
+    212          void NVIC_Configuration(void)
+    213          {
+    214          
+    215          //#ifdef  VECT_TAB_RAM  
+    216            /* Set the Vector Table base location at 0x20000000 */ 
+    217            //NVIC_SetVectorTable(NVIC_VectTab_RAM, 0x0); 
+    218          //#else  /* VECT_TAB_FLASH  */
+    219            /* Set the Vector Table base location at 0x08000000 */ 
+    220            NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);   
+    221          //#endif 
+    222          }
+    223          #ifdef  DEBUG
+    224          /*******************************************************************************
+    225          * Function Name  : assert_failed
+    226          * Description    : Reports the name of the source file and the source line number
+    227          *                  where the assert error has occurred.
+    228          * Input          : - file: pointer to the source file name
+    229          *                  - line: assert error line source number
+    230          * Output         : None
+    231          * Return         : None
+    232          *******************************************************************************/
+    233          void assert_failed(u8* file, u32 line)
+    234          {
+    235            /* User can add his own implementation to report the file name and line number */
+    236          
+    237            //printf("\n\r Wrong parameter value detected on\r\n");
+    238            //printf("       file  %s\r\n", file);
+    239            //printf("       line  %d\r\n", line);
+    240          
+    241            /* Infinite loop */
+    242            /* while (1)
+    243            {
+    244            } */
+    245          }
+    246          #endif
+    247          /***************************************END OF FILE********************************/
+    248          
+    249          
+    250          
+    251          
+
+   Maximum stack usage in bytes:
+
+     Function           .cstack
+     --------           -------
+     NVIC_Configuration      8
+     NVIC_SystemReset        0
+     main                   16
+
+
+   Section sizes:
+
+     Function/Label      Bytes
+     --------------      -----
+     NVIC_SystemReset      22
+     Jump_To_Application    4
+     JumpAddress            4
+     ReceiveDataBuf       552
+     ucTmp                 20
+     ulLen                  4
+     rdPage                 2
+     temp                   8
+     temp2                  4
+     i                      4
+     main                 640
+     NVIC_Configuration    14
+     ??DataTable1           4
+     ??DataTable1_1         4
+     ??DataTable1_2         4
+     ??DataTable1_3         4
+     ??DataTable1_4         4
+     ??DataTable1_5         4
+     ??DataTable1_6         4
+     ??DataTable1_7         4
+     ??DataTable1_8         4
+     ??DataTable1_9         4
+     ??DataTable1_10        4
+     ??DataTable1_11        4
+     ??DataTable1_12        4
+
+ 
+ 602 bytes in section .bss
+ 728 bytes in section .text
+ 
+ 728 bytes of CODE memory
+ 602 bytes of DATA memory
+
+Errors: none
+Warnings: none

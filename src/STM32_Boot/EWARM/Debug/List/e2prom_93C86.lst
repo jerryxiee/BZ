@@ -1,0 +1,510 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.10.2.52244/W32 for ARM     16/Jun/2013  11:44:30 #
+# Copyright 1999-2010 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\S #
+#                    TM32_Boot\src\e2prom_93C86.c                             #
+#    Command line =  "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\ #
+#                    STM32_Boot\src\e2prom_93C86.c" -D STM32F10X_CL -D        #
+#                    USE_STDPERIPH_DRIVER -lcN "D:\dxl\EGS701(新)\源程序\改进 #
+#                    型EGS701-1\STM32F2xx_Boot\STM32_Boot\EWARM\Debug\List\"  #
+#                    -lb "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_B #
+#                    oot\STM32_Boot\EWARM\Debug\List\" -o                     #
+#                    "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\ #
+#                    STM32_Boot\EWARM\Debug\Obj\" --no_cse --no_unroll        #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --warnings_are_errors --fpu=None --dlib_config        #
+#                    "C:\Program Files\IAR Systems\Embedded Workbench         #
+#                    6.0\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\ #
+#                    STM32_Boot\EWARM\..\inc\" -I                             #
+#                    "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\ #
+#                    STM32_Boot\EWARM\..\CMSIS\CM3\CoreSupport\" -I           #
+#                    "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\ #
+#                    STM32_Boot\EWARM\..\STM32F2xx_StdPeriph_Driver\inc\" -I  #
+#                    "D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\ #
+#                    STM32_Boot\EWARM\..\CMSIS\CM3\DeviceSupport\ST\STM32F2xx #
+#                    \" -On --use_c++_inline                                  #
+#    List file    =  D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\S #
+#                    TM32_Boot\EWARM\Debug\List\e2prom_93C86.lst              #
+#    Object file  =  D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\S #
+#                    TM32_Boot\EWARM\Debug\Obj\e2prom_93C86.o                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\dxl\EGS701(新)\源程序\改进型EGS701-1\STM32F2xx_Boot\STM32_Boot\src\e2prom_93C86.c
+      1          /*************************************************************************
+      2          *
+      3          * Copyright (c) 2008,深圳市伊爱高新技术开发有限公司
+      4          * All rights reserved.
+      5          *
+      6          * 文件名称 : FM24C64.c
+      7          * 功能     : 铁电存储器FM24C64的读写操作.
+      8          *
+      9          * 当前版本 : 1.0
+     10          * 开发者   : xiezm
+     11          * 修改时间 : 2009年5月7日
+     12          *
+     13          * 历史版本 : 
+     14          * 开发者   : 
+     15          * 完成时间 : 
+     16          * 
+     17          * 备注 :
+     18          *************************************************************************/
+     19          //#pragma SRC
+     20          #include "stm32f2xx.h"
+     21          #include "stm32f2xx_lib.h"
+     22          #include "e2prom_93C86.h"
+     23          
+     24          #define E2_LAST_ADDR		0x07fe//2046
+     25          
+     26          #define EWDS       0x2000  /* Write disable instruction */
+     27          #define WREN       0x2600  /* Write enable instruction */
+     28          
+     29          #define READ       0x3000  /* Read from Memory instruction */
+     30          #define WRITE      0x2800  /* Read Status Register instruction  */
+     31          
+     32          #define WIP_Flag   0x01  /* Write In Progress (WIP) flag */
+     33          #define ADDR_BITNUM   11
+     34          
+     35          void E2prom_SendByte(u16 op_data, u8 num);
+     36          void E2prom_Start();
+     37          void E2prom_Stop();
+     38          ErrorStatus E2prom_ACK();
+     39          void E2prom_SendByte(u16 op_data, u8 num);
+     40          void E2prom_EWEN();
+     41          void E2prom_EWDS();
+     42          void E2prom_InitIO();
+     43          void E2prom_ResumeIO();
+     44          /********************************************************************
+     45          * 名称 : I2C_Start
+     46          * 功能 : 启动I2C 开始 时序
+     47          *
+     48          * 输入: 无
+     49          * 输出: 无
+     50          *
+     51          * 全局变量: 
+     52          * 调用函数:
+     53          *
+     54          * 中断资源:  (没有,不写)
+     55          *
+     56          * 备注: (修改记录内容、时间)
+     57          ********************************************************************/
+     58          void E2prom_ReadByte(u16 Address, u8 * destin, u8 bytenum)
+     59          {
+     60            u8	i;
+     61            u8  	ch;
+     62            u16 addr;
+     63            
+     64            if(bytenum == 0)
+     65              return;
+     66            
+     67            E2PROM_INTERFACE_INIT();
+     68            
+     69            E2prom_Start();
+     70            addr = READ | (Address & 0x07FF);
+     71            E2prom_SendByte(addr, ADDR_BITNUM + 3);
+     72            ch = 0; /*存放返回数据的缓冲先清零*/
+     73            
+     74            do{
+     75              for(i = 0; i < 8; i++)
+     76              {
+     77                SPI_FLASH_93C_SCK_HIGH();
+     78                ch <<= 1; 
+     79                ch |= SPI_FLASH_93C_SO_READ(); 
+     80                SPI_FLASH_93C_SCK_LOW();
+     81              }
+     82              *destin++ = ch;
+     83              bytenum--;
+     84            }while(bytenum != 0);
+     85          	
+     86            E2prom_Start();
+     87            SPI_FLASH_93C_CS_LOW();
+     88          }
+     89          
+     90          /********************************************************************
+     91          * 名称 : I2C_Start
+     92          * 功能 : 启动I2C 开始 时序
+     93          *
+     94          * 输入: 无
+     95          * 输出: 无
+     96          *
+     97          * 全局变量: 
+     98          * 调用函数:
+     99          *
+    100          * 中断资源:  (没有,不写)
+    101          *
+    102          * 备注: (修改记录内容、时间)
+    103          ********************************************************************/
+    104          ErrorStatus E2prom_WriteByte(u16 Address, u8 data)
+    105          {
+    106            //u8 i,ch;
+    107            u16 addr;
+    108            ErrorStatus flag;
+    109            
+    110            E2PROM_INTERFACE_INIT();
+    111            
+    112            SPI_FLASH_93C_WP_HIGH();
+    113            E2prom_EWEN();
+    114            E2prom_Start();
+    115            addr = WRITE | (Address & 0x07FF);
+    116            E2prom_SendByte(addr, ADDR_BITNUM + 3);
+    117            E2prom_SendByte(data, 8);
+    118            flag = E2prom_ACK();
+    119            E2prom_Stop();
+    120            E2prom_EWDS();
+    121            
+    122            SPI_FLASH_93C_CS_LOW();
+    123            SPI_FLASH_93C_WP_LOW();
+    124          
+    125            return(flag);
+    126          }
+    127          
+    128          /********************************************************************
+    129          * 名称 : E2prom_InitIO
+    130          * 功能 : 启动I2C 开始 时序
+    131          *
+    132          * 输入: 无
+    133          * 输出: 无
+    134          *
+    135          * 全局变量: 
+    136          * 调用函数:
+    137          *
+    138          * 中断资源:  (没有,不写)
+    139          *
+    140          * 备注: (修改记录内容、时间)
+    141          ********************************************************************/
+    142          void E2prom_InitIO()
+    143          {
+    144            GPIO_InitTypeDef GPIO_InitStructure;
+    145            GPIO_StructInit(&GPIO_InitStructure);
+    146            
+    147            /*推挽输出*/
+    148            RCC_AHB1PeriphClockCmd(E2PROM_SCK_GPIO_CLK,ENABLE);
+    149            GPIO_InitStructure.GPIO_Pin = E2PROM_SCK_PIN;
+    150            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+    151            GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    152            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    153            GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    154            GPIO_Init(E2PROM_SCK_GPIO_PORT, &GPIO_InitStructure);
+    155            
+    156            RCC_AHB1PeriphClockCmd(E2PROM_SPI_SI_GPIO_CLK,ENABLE);
+    157            GPIO_InitStructure.GPIO_Pin = E2PROM_SPI_SI_PIN;
+    158            GPIO_Init(E2PROM_SPI_SI_GPIO_PORT, &GPIO_InitStructure);
+    159            
+    160            RCC_AHB1PeriphClockCmd(E2PROM_CS_GPIO_CLK,ENABLE);
+    161            GPIO_InitStructure.GPIO_Pin = E2PROM_CS_PIN;
+    162            GPIO_Init(E2PROM_CS_GPIO_PORT, &GPIO_InitStructure);
+    163          
+    164            RCC_AHB1PeriphClockCmd(E2PROM_WPE_GPIO_CLK,ENABLE);
+    165            GPIO_InitStructure.GPIO_Pin = E2PROM_WPE_PIN;
+    166            GPIO_Init(E2PROM_WPE_GPIO_PORT, &GPIO_InitStructure);
+    167            
+    168            /*浮空输入*/
+    169            RCC_AHB1PeriphClockCmd(E2PROM_SO_GPIO_CLK,ENABLE);
+    170            GPIO_InitStructure.GPIO_Pin = E2PROM_SO_PIN;
+    171            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+    172            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    173            GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;       /*需要上拉电阻，防止DO由于是低电平而无法输入*/
+    174            GPIO_Init(E2PROM_SO_GPIO_PORT, &GPIO_InitStructure); 
+    175             
+    176          }
+    177          /********************************************************************
+    178          * 名称 : CheckEepromChip(void)
+    179          * 功能 : 检查EEPROM芯片工作是否正常
+    180          *        eeprom地址的最后两个字节用来做自检用
+    181          * 输入: 无
+    182          * 输出: 无
+    183          *
+    184          * 全局变量: 
+    185          * 调用函数:
+    186          *
+    187          * 中断资源:  (没有,不写)
+    188          *
+    189          * 备注: (修改记录内容、时间)
+    190          ********************************************************************/
+    191          ErrorStatus CheckEepromChip(void)
+    192          {
+    193          	u8	i;
+    194          	u8	ReadBuffer[3] = {0};
+    195          	u8	WriteBuffer[3] = {"AB"};
+    196          	u16	Address;
+    197          	ErrorStatus 	ErrorFlag = SUCCESS;
+    198          	
+    199          	Address = E2_LAST_ADDR;   //最后一个字节2*1024 - 2
+    200          	
+    201          	for(i=0; i<3; i++)
+    202          	{
+    203          		//往地址最后两个字节写数据
+    204          		E2prom_WriteByte(Address, WriteBuffer[0]);
+    205          		E2prom_WriteByte(Address+1, WriteBuffer[1]);
+    206          		
+    207          		//读出刚写入的字节数
+    208          		E2prom_ReadByte(Address, ReadBuffer, 2);
+    209          		
+    210          		//比较写入的内容与读出的内容是否一致
+    211          		if((WriteBuffer[0] == ReadBuffer[0])&&(WriteBuffer[1] == ReadBuffer[1]))
+    212          		{
+    213          		
+    214          		}
+    215          		else
+    216          		{
+    217          			ErrorFlag = ERROR;
+    218          			break;
+    219          		}
+    220          	}
+    221          	
+    222          	return ErrorFlag;
+    223          }
+    224          
+    225          /********************************************************************
+    226          * 名称 : E2prom_ResumeIO
+    227          * 功能 : 启动I2C 开始 时序
+    228          *
+    229          * 输入: 无
+    230          * 输出: 无
+    231          *
+    232          * 全局变量: 
+    233          * 调用函数:
+    234          *
+    235          * 中断资源:  (没有,不写)
+    236          *
+    237          * 备注: (修改记录内容、时间)
+    238          ********************************************************************/
+    239          /*
+    240          void E2prom_ResumeIO()
+    241          {
+    242            GPIO_InitTypeDef GPIO_InitStructure;
+    243            
+    244            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+    245            //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    246            //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+    247            //GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    248            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    249            GPIO_Init(GPIOA, &GPIO_InitStructure);
+    250          }
+    251          */
+    252          /********************************************************************
+    253          * 名称 : I2C_Start
+    254          * 功能 : 启动I2C 开始 时序
+    255          *
+    256          * 输入: 无
+    257          * 输出: 无
+    258          *
+    259          * 全局变量: 
+    260          * 调用函数:
+    261          *
+    262          * 中断资源:  (没有,不写)
+    263          *
+    264          * 备注: (修改记录内容、时间)
+    265          ********************************************************************/
+    266          void E2prom_Start()
+    267          {
+    268            
+    269            SPI_FLASH_93C_SCK_LOW();
+    270            SPI_FLASH_93C_SI_HIGH();
+    271            SPI_FLASH_93C_CS_HIGH();
+    272            SPI_FLASH_93C_SCK_HIGH();
+    273           
+    274          }
+    275          
+    276          /********************************************************************
+    277          * 名称 : I2C_Stop
+    278          * 功能 : 启动I2C 结束 时序
+    279          *
+    280          * 输入: 无
+    281          * 输出: 无
+    282          *
+    283          * 全局变量: 
+    284          * 调用函数:
+    285          *
+    286          * 中断资源:  (没有,不写)
+    287          *
+    288          * 备注: (修改记录内容、时间)
+    289          ********************************************************************/
+    290          void E2prom_Stop()
+    291          {
+    292            SPI_FLASH_93C_CS_LOW();
+    293            SPI_FLASH_93C_SI_HIGH();
+    294            SPI_FLASH_93C_SCK_HIGH();
+    295          }
+    296          
+    297          /********************************************************************
+    298          * 名称 : I2C_ACK
+    299          * 功能 : 检测I2C 应答 标志
+    300          *
+    301          * 输入: 无
+    302          * 输出: 无
+    303          *
+    304          * 全局变量: 
+    305          * 调用函数:
+    306          *
+    307          * 中断资源:  (没有,不写)
+    308          *
+    309          * 备注: (修改记录内容、时间)
+    310          ********************************************************************/
+    311          ErrorStatus E2prom_ACK()
+    312          {
+    313            SPI_FLASH_93C_CS_LOW();
+    314            SPI_FLASH_93C_CS_LOW();
+    315            SPI_FLASH_93C_CS_HIGH();
+    316            while(SPI_FLASH_93C_SO_READ() == 0);
+    317            /*
+    318          	I2SDA=1;I2SCL = 1; ACC0 = I2SDA; I2SCL = 0;
+    319          	if(_testbit_(ACC0))
+    320          	{
+    321           		return(0);	
+    322          	}
+    323          	
+    324          	return(1);
+    325          	*/
+    326            return SUCCESS;
+    327          }
+    328          
+    329          /********************************************************************
+    330          * 名称 : I2C_NACK
+    331          * 功能 : 启动I2C 非应答 时序
+    332          *
+    333          * 输入: 无
+    334          * 输出: 无
+    335          *
+    336          * 全局变量: 
+    337          * 调用函数:
+    338          *
+    339          * 中断资源:  (没有,不写)
+    340          *
+    341          * 备注: (修改记录内容、时间)
+    342          ********************************************************************/
+    343          void I2C_NACK()
+    344          {
+    345          	//I2SDA = 1;I2SCL = 1; ACC0 = I2SDA; I2SCL = 0;
+    346          }
+    347          
+    348          /********************************************************************
+    349          * 名称 : I2cWriteByte
+    350          * 功能 : 输出不定位数据 到eeprom,此数据可能为 地址,先导字或写入的数据 等
+    351          *
+    352          * 输入: dat : 写入 24C64的 值
+    353          * 输出: 无
+    354          *
+    355          * 全局变量: 
+    356          * 调用函数:
+    357          *
+    358          * 中断资源:  (没有,不写)
+    359          *
+    360          * 备注: (修改记录内容、时间)
+    361          ********************************************************************/
+    362          void E2prom_SendByte(u16 op_data, u8 num)
+    363          {
+    364            u8 i;
+    365            
+    366            op_data = op_data<<(16-num); /*左移去掉无用高位*/
+    367            for(i = 0; i < num; i++)
+    368            {
+    369              if( (op_data&0X8000)==00 )
+    370              {
+    371                SPI_FLASH_93C_SI_LOW();
+    372              }else{
+    373                SPI_FLASH_93C_SI_HIGH();
+    374              }
+    375              SPI_FLASH_93C_SCK_HIGH();
+    376              SPI_FLASH_93C_SCK_LOW();
+    377              op_data = op_data<<1;
+    378            }
+    379          }
+    380          
+    381          /***********************************************************************
+    382          * 名称 : I2cWriteByte
+    383          * 功能 : 输出不定位数据 到eeprom,此数据可能为 地址,先导字或写入的数据 等
+    384          *
+    385          * 输入: dat : 写入 24C64的 值
+    386          * 输出: 无
+    387          *
+    388          * 全局变量: 
+    389          * 调用函数:
+    390          *
+    391          * 中断资源:  (没有,不写)
+    392          *
+    393          * 备注: (修改记录内容、时间)
+    394          ***********************************************************************/
+    395          void E2prom_EWEN()
+    396          {
+    397            //u16 senddat;
+    398            
+    399            E2prom_Start();
+    400            E2prom_SendByte(WREN, ADDR_BITNUM + 3); /*送入3 位操作码+11*/
+    401            E2prom_Stop();
+    402          }
+    403          
+    404          /***********************************************************************
+    405          * 名称 : I2cWriteByte
+    406          * 功能 : 输出不定位数据 到eeprom,此数据可能为 地址,先导字或写入的数据 等
+    407          *
+    408          * 输入: dat : 写入 24C64的 值
+    409          * 输出: 无
+    410          *
+    411          * 全局变量: 
+    412          * 调用函数:
+    413          *
+    414          * 中断资源:  (没有,不写)
+    415          *
+    416          * 备注: (修改记录内容、时间)
+    417          ***********************************************************************/
+    418          void E2prom_EWDS()
+    419          {
+    420            E2prom_Start();
+    421            E2prom_SendByte(EWDS, ADDR_BITNUM + 3); /*送入3 位操作码+11*/
+    422            E2prom_Stop();
+    423          }
+
+   Maximum stack usage in bytes:
+
+     Function         .cstack
+     --------         -------
+     CheckEepromChip      24
+     E2prom_ACK            8
+     E2prom_EWDS           8
+     E2prom_EWEN           8
+     E2prom_InitIO        16
+     E2prom_ReadByte      32
+     E2prom_SendByte      16
+     E2prom_Start          8
+     E2prom_Stop           8
+     E2prom_WriteByte     24
+     I2C_NACK              0
+
+
+   Section sizes:
+
+     Function/Label   Bytes
+     --------------   -----
+     E2prom_ReadByte   126
+     E2prom_WriteByte   98
+     E2prom_InitIO     156
+     CheckEepromChip   114
+     E2prom_Start       36
+     E2prom_Stop        28
+     E2prom_ACK         42
+     I2C_NACK            2
+     E2prom_SendByte    72
+     E2prom_EWEN        22
+     E2prom_EWDS        22
+     ??DataTable8        4
+     ??DataTable8_1      4
+     ?<Constant "AB">    4
+     ?<Constant {0}>     4
+
+ 
+   4 bytes in section .rodata
+ 730 bytes in section .text
+ 
+ 730 bytes of CODE  memory
+   4 bytes of CONST memory
+
+Errors: none
+Warnings: none

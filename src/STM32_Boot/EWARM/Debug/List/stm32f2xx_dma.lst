@@ -1,0 +1,1540 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.10.2.52244/W32 for ARM     04/Dec/2013  10:58:09 #
+# Copyright 1999-2010 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\STM32F2xx_StdPeriph_Driver\src\stm32f2xx #
+#                    _dma.c                                                   #
+#    Command line =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\STM32F2xx_StdPeriph_Driver\src\stm32f2xx #
+#                    _dma.c -D STM32F10X_CL -D USE_STDPERIPH_DRIVER -lcN      #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\ -lb                    #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\ -o                     #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\Obj\ --no_cse --no_unroll    #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --warnings_are_errors --fpu=None --dlib_config        #
+#                    E:\SoftwareInstall\arm\INC\c\DLib_Config_Normal.h -I     #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\inc\ -I                         #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\CMSIS\CM3\CoreSupport\ -I       #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\STM32F2xx_StdPeriph_Driver\inc\ #
+#                     -I D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\ #
+#                    改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_13081 #
+#                    5_IAR6.1\STM32_Boot\EWARM\..\CMSIS\CM3\DeviceSupport\ST\ #
+#                    STM32F2xx\ -On --use_c++_inline                          #
+#    List file    =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\stm32f2xx_dma.lst       #
+#    Object file  =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\Obj\stm32f2xx_dma.o          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IAR6.1\STM32_Boot\STM32F2xx_StdPeriph_Driver\src\stm32f2xx_dma.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    stm32f2xx_dma.c
+      4            * @author  MCD Application Team
+      5            * @version V1.0.0
+      6            * @date    18-April-2011
+      7            * @brief   This file provides firmware functions to manage the following 
+      8            *          functionalities of the Direct Memory Access controller (DMA):           
+      9            *           - Initialization and Configuration
+     10            *           - Data Counter
+     11            *           - Double Buffer mode configuration and command  
+     12            *           - Interrupts and flags management
+     13            *           
+     14            *  @verbatim
+     15            *      
+     16            *          ===================================================================      
+     17            *                                 How to use this driver
+     18            *          =================================================================== 
+     19            *          1. Enable The DMA controller clock using RCC_AHB1PeriphResetCmd(RCC_AHB1Periph_DMA1, ENABLE)
+     20            *             function for DMA1 or using RCC_AHB1PeriphResetCmd(RCC_AHB1Periph_DMA2, ENABLE)
+     21            *             function for DMA2.
+     22            *
+     23            *          2. Enable and configure the peripheral to be connected to the DMA Stream
+     24            *             (except for internal SRAM / FLASH memories: no initialization is 
+     25            *             necessary). 
+     26            *        
+     27            *          3. For a given Stream, program the required configuration through following parameters:   
+     28            *             Source and Destination addresses, Transfer Direction, Transfer size, Source and Destination 
+     29            *             data formats, Circular or Normal mode, Stream Priority level, Source and Destination 
+     30            *             Incrementation mode, FIFO mode and its Threshold (if needed), Burst mode for Source and/or 
+     31            *             Destination (if needed) using the DMA_Init() function.
+     32            *             To avoid filling un-nesecessary fields, you can call DMA_StructInit() function
+     33            *             to initialize a given structure with default values (reset values), the modify
+     34            *             only necessary fields (ie. Source and Destination addresses, Transfer size and Data Formats).
+     35            *
+     36            *          4. Enable the NVIC and the corresponding interrupt(s) using the function 
+     37            *             DMA_ITConfig() if you need to use DMA interrupts. 
+     38            *
+     39            *          5. Optionally, if the Circular mode is enabled, you can use the Double buffer mode by configuring 
+     40            *             the second Memory address and the first Memory to be used through the function 
+     41            *             DMA_DoubleBufferModeConfig(). Then enable the Double buffer mode through the function
+     42            *             DMA_DoubleBufferModeCmd(). These operations must be done before step 6.
+     43            *    
+     44            *          6. Enable the DMA stream using the DMA_Cmd() function. 
+     45            *                
+     46            *          7. Activate the needed Stream Request using PPP_DMACmd() function for
+     47            *             any PPP peripheral except internal SRAM and FLASH (ie. SPI, USART ...)
+     48            *             The function allowing this operation is provided in each PPP peripheral
+     49            *             driver (ie. SPI_DMACmd for SPI peripheral).
+     50            *             Once the Stream is enabled, it is not possible to modify its configuration
+     51            *             unless the stream is stopped and disabled.
+     52            *             After enabling the Stream, it is advised to monitor the EN bit status using
+     53            *             the function DMA_GetCmdStatus(). In case of configuration errors or bus errors
+     54            *             this bit will remain reset and all transfers on this Stream will remain on hold.      
+     55            *
+     56            *          8. Optionally, you can configure the number of data to be transferred
+     57            *             when the Stream is disabled (ie. after each Transfer Complete event
+     58            *             or when a Transfer Error occurs) using the function DMA_SetCurrDataCounter().
+     59            *             And you can get the number of remaining data to be transferred using 
+     60            *             the function DMA_GetCurrDataCounter() at run time (when the DMA Stream is
+     61            *             enabled and running).  
+     62            *                   
+     63            *          9. To control DMA events you can use one of the following 
+     64            *              two methods:
+     65            *               a- Check on DMA Stream flags using the function DMA_GetFlagStatus().  
+     66            *               b- Use DMA interrupts through the function DMA_ITConfig() at initialization
+     67            *                  phase and DMA_GetITStatus() function into interrupt routines in
+     68            *                  communication phase.  
+     69            *              After checking on a flag you should clear it using DMA_ClearFlag()
+     70            *              function. And after checking on an interrupt event you should 
+     71            *              clear it using DMA_ClearITPendingBit() function.    
+     72            *              
+     73            *          10. Optionally, if Circular mode and Double Buffer mode are enabled, you can modify
+     74            *              the Memory Addresses using the function DMA_MemoryTargetConfig(). Make sure that
+     75            *              the Memory Address to be modified is not the one currently in use by DMA Stream.
+     76            *              This condition can be monitored using the function DMA_GetCurrentMemoryTarget().
+     77            *              
+     78            *          11. Optionally, Pause-Resume operations may be performed:
+     79            *              The DMA_Cmd() function may be used to perform Pause-Resume operation. When a 
+     80            *              transfer is ongoing, calling this function to disable the Stream will cause the 
+     81            *              transfer to be paused. All configuration registers and the number of remaining 
+     82            *              data will be preserved. When calling again this function to re-enable the Stream, 
+     83            *              the transfer will be resumed from the point where it was paused.          
+     84            *                 
+     85            * @note   Memory-to-Memory transfer is possible by setting the address of the memory into
+     86            *         the Peripheral registers. In this mode, Circular mode and Double Buffer mode
+     87            *         are not allowed.
+     88            *  
+     89            * @note   The FIFO is used mainly to reduce bus usage and to allow data packing/unpacking: it is
+     90            *         possible to set different Data Sizes for the Peripheral and the Memory (ie. you can set
+     91            *         Half-Word data size for the peripheral to access its data register and set Word data size
+     92            *         for the Memory to gain in access time. Each two Half-words will be packed and written in
+     93            *         a single access to a Word in the Memory).
+     94            *    
+     95            * @note  When FIFO is disabled, it is not allowed to configure different Data Sizes for Source
+     96            *        and Destination. In this case the Peripheral Data Size will be applied to both Source
+     97            *        and Destination.               
+     98            *
+     99            *  @endverbatim
+    100            *                                  
+    101            ******************************************************************************
+    102            * @attention
+    103            *
+    104            * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+    105            * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+    106            * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+    107            * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+    108            * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+    109            * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+    110            *
+    111            * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+    112            ******************************************************************************  
+    113            */ 
+    114          
+    115          /* Includes ------------------------------------------------------------------*/
+    116          #include "stm32f2xx_dma.h"
+    117          #include "stm32f2xx_rcc.h"
+    118          #include "assert.h"
+    119          /** @addtogroup STM32F2xx_StdPeriph_Driver
+    120            * @{
+    121            */
+    122          
+    123          /** @defgroup DMA 
+    124            * @brief DMA driver modules
+    125            * @{
+    126            */ 
+    127          
+    128          /* Private typedef -----------------------------------------------------------*/
+    129          /* Private define ------------------------------------------------------------*/
+    130          
+    131          /* Masks Definition */
+    132          #define TRANSFER_IT_ENABLE_MASK (uint32_t)(DMA_SxCR_TCIE | DMA_SxCR_HTIE | \
+    133                                                     DMA_SxCR_TEIE | DMA_SxCR_DMEIE)
+    134          
+    135          #define DMA_Stream0_IT_MASK     (uint32_t)(DMA_LISR_FEIF0 | DMA_LISR_DMEIF0 | \
+    136                                                     DMA_LISR_TEIF0 | DMA_LISR_HTIF0 | \
+    137                                                     DMA_LISR_TCIF0)
+    138          
+    139          #define DMA_Stream1_IT_MASK     (uint32_t)(DMA_Stream0_IT_MASK << 6)
+    140          #define DMA_Stream2_IT_MASK     (uint32_t)(DMA_Stream0_IT_MASK << 16)
+    141          #define DMA_Stream3_IT_MASK     (uint32_t)(DMA_Stream0_IT_MASK << 22)
+    142          #define DMA_Stream4_IT_MASK     (uint32_t)(DMA_Stream0_IT_MASK | (uint32_t)0x20000000)
+    143          #define DMA_Stream5_IT_MASK     (uint32_t)(DMA_Stream1_IT_MASK | (uint32_t)0x20000000)
+    144          #define DMA_Stream6_IT_MASK     (uint32_t)(DMA_Stream2_IT_MASK | (uint32_t)0x20000000)
+    145          #define DMA_Stream7_IT_MASK     (uint32_t)(DMA_Stream3_IT_MASK | (uint32_t)0x20000000)
+    146          #define TRANSFER_IT_MASK        (uint32_t)0x0F3C0F3C
+    147          #define HIGH_ISR_MASK           (uint32_t)0x20000000
+    148          #define RESERVED_MASK           (uint32_t)0x0F7D0F7D  
+    149          
+    150          /* Private macro -------------------------------------------------------------*/
+    151          /* Private variables ---------------------------------------------------------*/
+    152          /* Private function prototypes -----------------------------------------------*/
+    153          /* Private functions ---------------------------------------------------------*/
+    154          
+    155          
+    156          /** @defgroup DMA_Private_Functions
+    157            * @{
+    158            */
+    159          
+    160          /** @defgroup DMA_Group1 Initialization and Configuration functions
+    161           *  @brief   Initialization and Configuration functions
+    162           *
+    163          @verbatim   
+    164           ===============================================================================
+    165                           Initialization and Configuration functions
+    166           ===============================================================================  
+    167          
+    168            This subsection provides functions allowing to initialize the DMA Stream source
+    169            and destination addresses, incrementation and data sizes, transfer direction, 
+    170            buffer size, circular/normal mode selection, memory-to-memory mode selection 
+    171            and Stream priority value.
+    172            
+    173            The DMA_Init() function follows the DMA configuration procedures as described in
+    174            reference manual (RM0033) except the first point: waiting on EN bit to be reset.
+    175            This condition should be checked by user application using the function DMA_GetCmdStatus()
+    176            before calling the DMA_Init() function.
+    177          
+    178          @endverbatim
+    179            * @{
+    180            */
+    181          
+    182          /**
+    183            * @brief  Deinitialize the DMAy Streamx registers to their default reset values.
+    184            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    185            *         to 7 to select the DMA Stream.
+    186            * @retval None
+    187            */
+    188          void DMA_DeInit(DMA_Stream_TypeDef* DMAy_Streamx)
+    189          {
+    190            /* Check the parameters */
+    191            //assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    192          
+    193            /* Disable the selected DMAy Streamx */
+    194            DMAy_Streamx->CR &= ~((uint32_t)DMA_SxCR_EN);
+    195          
+    196            /* Reset DMAy Streamx control register */
+    197            DMAy_Streamx->CR  = 0;
+    198            
+    199            /* Reset DMAy Streamx Number of Data to Transfer register */
+    200            DMAy_Streamx->NDTR = 0;
+    201            
+    202            /* Reset DMAy Streamx peripheral address register */
+    203            DMAy_Streamx->PAR  = 0;
+    204            
+    205            /* Reset DMAy Streamx memory 0 address register */
+    206            DMAy_Streamx->M0AR = 0;
+    207          
+    208            /* Reset DMAy Streamx memory 1 address register */
+    209            DMAy_Streamx->M1AR = 0;
+    210          
+    211            /* Reset DMAy Streamx FIFO control register */
+    212            DMAy_Streamx->FCR = (uint32_t)0x00000021; 
+    213          
+    214            /* Reset interrupt pending bits for the selected stream */
+    215            if (DMAy_Streamx == DMA1_Stream0)
+    216            {
+    217              /* Reset interrupt pending bits for DMA1 Stream0 */
+    218              DMA1->LIFCR = DMA_Stream0_IT_MASK;
+    219            }
+    220            else if (DMAy_Streamx == DMA1_Stream1)
+    221            {
+    222              /* Reset interrupt pending bits for DMA1 Stream1 */
+    223              DMA1->LIFCR = DMA_Stream1_IT_MASK;
+    224            }
+    225            else if (DMAy_Streamx == DMA1_Stream2)
+    226            {
+    227              /* Reset interrupt pending bits for DMA1 Stream2 */
+    228              DMA1->LIFCR = DMA_Stream2_IT_MASK;
+    229            }
+    230            else if (DMAy_Streamx == DMA1_Stream3)
+    231            {
+    232              /* Reset interrupt pending bits for DMA1 Stream3 */
+    233              DMA1->LIFCR = DMA_Stream3_IT_MASK;
+    234            }
+    235            else if (DMAy_Streamx == DMA1_Stream4)
+    236            {
+    237              /* Reset interrupt pending bits for DMA1 Stream4 */
+    238              DMA1->HIFCR = DMA_Stream4_IT_MASK;
+    239            }
+    240            else if (DMAy_Streamx == DMA1_Stream5)
+    241            {
+    242              /* Reset interrupt pending bits for DMA1 Stream5 */
+    243              DMA1->HIFCR = DMA_Stream5_IT_MASK;
+    244            }
+    245            else if (DMAy_Streamx == DMA1_Stream6)
+    246            {
+    247              /* Reset interrupt pending bits for DMA1 Stream6 */
+    248              DMA1->HIFCR = (uint32_t)DMA_Stream6_IT_MASK;
+    249            }
+    250            else if (DMAy_Streamx == DMA1_Stream7)
+    251            {
+    252              /* Reset interrupt pending bits for DMA1 Stream7 */
+    253              DMA1->HIFCR = DMA_Stream7_IT_MASK;
+    254            }
+    255            else if (DMAy_Streamx == DMA2_Stream0)
+    256            {
+    257              /* Reset interrupt pending bits for DMA2 Stream0 */
+    258              DMA2->LIFCR = DMA_Stream0_IT_MASK;
+    259            }
+    260            else if (DMAy_Streamx == DMA2_Stream1)
+    261            {
+    262              /* Reset interrupt pending bits for DMA2 Stream1 */
+    263              DMA2->LIFCR = DMA_Stream1_IT_MASK;
+    264            }
+    265            else if (DMAy_Streamx == DMA2_Stream2)
+    266            {
+    267              /* Reset interrupt pending bits for DMA2 Stream2 */
+    268              DMA2->LIFCR = DMA_Stream2_IT_MASK;
+    269            }
+    270            else if (DMAy_Streamx == DMA2_Stream3)
+    271            {
+    272              /* Reset interrupt pending bits for DMA2 Stream3 */
+    273              DMA2->LIFCR = DMA_Stream3_IT_MASK;
+    274            }
+    275            else if (DMAy_Streamx == DMA2_Stream4)
+    276            {
+    277              /* Reset interrupt pending bits for DMA2 Stream4 */
+    278              DMA2->HIFCR = DMA_Stream4_IT_MASK;
+    279            }
+    280            else if (DMAy_Streamx == DMA2_Stream5)
+    281            {
+    282              /* Reset interrupt pending bits for DMA2 Stream5 */
+    283              DMA2->HIFCR = DMA_Stream5_IT_MASK;
+    284            }
+    285            else if (DMAy_Streamx == DMA2_Stream6)
+    286            {
+    287              /* Reset interrupt pending bits for DMA2 Stream6 */
+    288              DMA2->HIFCR = DMA_Stream6_IT_MASK;
+    289            }
+    290            else 
+    291            {
+    292              if (DMAy_Streamx == DMA2_Stream7)
+    293              {
+    294                /* Reset interrupt pending bits for DMA2 Stream7 */
+    295                DMA2->HIFCR = DMA_Stream7_IT_MASK;
+    296              }
+    297            }
+    298          }
+    299          
+    300          /**
+    301            * @brief  Initializes the DMAy Streamx according to the specified parameters in 
+    302            *         the DMA_InitStruct structure.
+    303            * @note   Before calling this function, it is recommended to check that the Stream 
+    304            *         is actually disabled using the function DMA_GetCmdStatus().  
+    305            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    306            *         to 7 to select the DMA Stream.
+    307            * @param  DMA_InitStruct: pointer to a DMA_InitTypeDef structure that contains
+    308            *         the configuration information for the specified DMA Stream.  
+    309            * @retval None
+    310            */
+    311          void DMA_Init(DMA_Stream_TypeDef* DMAy_Streamx, DMA_InitTypeDef* DMA_InitStruct)
+    312          {
+    313            uint32_t tmpreg = 0;
+    314          
+    315            /* Check the parameters */
+    316            /*
+    317            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    318            assert(IS_DMA_CHANNEL(DMA_InitStruct->DMA_Channel));
+    319            assert(IS_DMA_DIRECTION(DMA_InitStruct->DMA_DIR));
+    320            assert(IS_DMA_BUFFER_SIZE(DMA_InitStruct->DMA_BufferSize));
+    321            assert(IS_DMA_PERIPHERAL_INC_STATE(DMA_InitStruct->DMA_PeripheralInc));
+    322            assert(IS_DMA_MEMORY_INC_STATE(DMA_InitStruct->DMA_MemoryInc));
+    323            assert(IS_DMA_PERIPHERAL_DATA_SIZE(DMA_InitStruct->DMA_PeripheralDataSize));
+    324            assert(IS_DMA_MEMORY_DATA_SIZE(DMA_InitStruct->DMA_MemoryDataSize));
+    325            assert(IS_DMA_MODE(DMA_InitStruct->DMA_Mode));
+    326            assert(IS_DMA_PRIORITY(DMA_InitStruct->DMA_Priority));
+    327            assert(IS_DMA_FIFO_MODE_STATE(DMA_InitStruct->DMA_FIFOMode));
+    328            assert(IS_DMA_FIFO_THRESHOLD(DMA_InitStruct->DMA_FIFOThreshold));
+    329            assert(IS_DMA_MEMORY_BURST(DMA_InitStruct->DMA_MemoryBurst));
+    330            assert(IS_DMA_PERIPHERAL_BURST(DMA_InitStruct->DMA_PeripheralBurst));
+    331          */
+    332            /*------------------------- DMAy Streamx CR Configuration ------------------*/
+    333            /* Get the DMAy_Streamx CR value */
+    334            tmpreg = DMAy_Streamx->CR;
+    335          
+    336            /* Clear CHSEL, MBURST, PBURST, PL, MSIZE, PSIZE, MINC, PINC, CIRC and DIR bits */
+    337            tmpreg &= ((uint32_t)~(DMA_SxCR_CHSEL | DMA_SxCR_MBURST | DMA_SxCR_PBURST | \
+    338                                   DMA_SxCR_PL | DMA_SxCR_MSIZE | DMA_SxCR_PSIZE | \
+    339                                   DMA_SxCR_MINC | DMA_SxCR_PINC | DMA_SxCR_CIRC | \
+    340                                   DMA_SxCR_DIR));
+    341          
+    342            /* Configure DMAy Streamx: */
+    343            /* Set CHSEL bits according to DMA_CHSEL value */
+    344            /* Set DIR bits according to DMA_DIR value */
+    345            /* Set PINC bit according to DMA_PeripheralInc value */
+    346            /* Set MINC bit according to DMA_MemoryInc value */
+    347            /* Set PSIZE bits according to DMA_PeripheralDataSize value */
+    348            /* Set MSIZE bits according to DMA_MemoryDataSize value */
+    349            /* Set CIRC bit according to DMA_Mode value */
+    350            /* Set PL bits according to DMA_Priority value */
+    351            /* Set MBURST bits according to DMA_MemoryBurst value */
+    352            /* Set PBURST bits according to DMA_PeripheralBurst value */
+    353            tmpreg |= DMA_InitStruct->DMA_Channel | DMA_InitStruct->DMA_DIR |
+    354                      DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+    355                      DMA_InitStruct->DMA_PeripheralDataSize | DMA_InitStruct->DMA_MemoryDataSize |
+    356                      DMA_InitStruct->DMA_Mode | DMA_InitStruct->DMA_Priority |
+    357                      DMA_InitStruct->DMA_MemoryBurst | DMA_InitStruct->DMA_PeripheralBurst;
+    358          
+    359            /* Write to DMAy Streamx CR register */
+    360            DMAy_Streamx->CR = tmpreg;
+    361          
+    362            /*------------------------- DMAy Streamx FCR Configuration -----------------*/
+    363            /* Get the DMAy_Streamx FCR value */
+    364            tmpreg = DMAy_Streamx->FCR;
+    365          
+    366            /* Clear DMDIS and FTH bits */
+    367            tmpreg &= (uint32_t)~(DMA_SxFCR_DMDIS | DMA_SxFCR_FTH);
+    368          
+    369            /* Configure DMAy Streamx FIFO: 
+    370              Set DMDIS bits according to DMA_FIFOMode value 
+    371              Set FTH bits according to DMA_FIFOThreshold value */
+    372            tmpreg |= DMA_InitStruct->DMA_FIFOMode | DMA_InitStruct->DMA_FIFOThreshold;
+    373          
+    374            /* Write to DMAy Streamx CR */
+    375            DMAy_Streamx->FCR = tmpreg;
+    376          
+    377            /*------------------------- DMAy Streamx NDTR Configuration ----------------*/
+    378            /* Write to DMAy Streamx NDTR register */
+    379            DMAy_Streamx->NDTR = DMA_InitStruct->DMA_BufferSize;
+    380          
+    381            /*------------------------- DMAy Streamx PAR Configuration -----------------*/
+    382            /* Write to DMAy Streamx PAR */
+    383            DMAy_Streamx->PAR = DMA_InitStruct->DMA_PeripheralBaseAddr;
+    384          
+    385            /*------------------------- DMAy Streamx M0AR Configuration ----------------*/
+    386            /* Write to DMAy Streamx M0AR */
+    387            DMAy_Streamx->M0AR = DMA_InitStruct->DMA_Memory0BaseAddr;
+    388          }
+    389          
+    390          /**
+    391            * @brief  Fills each DMA_InitStruct member with its default value.
+    392            * @param  DMA_InitStruct : pointer to a DMA_InitTypeDef structure which will 
+    393            *         be initialized.
+    394            * @retval None
+    395            */
+    396          void DMA_StructInit(DMA_InitTypeDef* DMA_InitStruct)
+    397          {
+    398            /*-------------- Reset DMA init structure parameters values ----------------*/
+    399            /* Initialize the DMA_Channel member */
+    400            DMA_InitStruct->DMA_Channel = 0;
+    401          
+    402            /* Initialize the DMA_PeripheralBaseAddr member */
+    403            DMA_InitStruct->DMA_PeripheralBaseAddr = 0;
+    404          
+    405            /* Initialize the DMA_Memory0BaseAddr member */
+    406            DMA_InitStruct->DMA_Memory0BaseAddr = 0;
+    407          
+    408            /* Initialize the DMA_DIR member */
+    409            DMA_InitStruct->DMA_DIR = DMA_DIR_PeripheralToMemory;
+    410          
+    411            /* Initialize the DMA_BufferSize member */
+    412            DMA_InitStruct->DMA_BufferSize = 0;
+    413          
+    414            /* Initialize the DMA_PeripheralInc member */
+    415            DMA_InitStruct->DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    416          
+    417            /* Initialize the DMA_MemoryInc member */
+    418            DMA_InitStruct->DMA_MemoryInc = DMA_MemoryInc_Disable;
+    419          
+    420            /* Initialize the DMA_PeripheralDataSize member */
+    421            DMA_InitStruct->DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+    422          
+    423            /* Initialize the DMA_MemoryDataSize member */
+    424            DMA_InitStruct->DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+    425          
+    426            /* Initialize the DMA_Mode member */
+    427            DMA_InitStruct->DMA_Mode = DMA_Mode_Normal;
+    428          
+    429            /* Initialize the DMA_Priority member */
+    430            DMA_InitStruct->DMA_Priority = DMA_Priority_Low;
+    431          
+    432            /* Initialize the DMA_FIFOMode member */
+    433            DMA_InitStruct->DMA_FIFOMode = DMA_FIFOMode_Disable;
+    434          
+    435            /* Initialize the DMA_FIFOThreshold member */
+    436            DMA_InitStruct->DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
+    437          
+    438            /* Initialize the DMA_MemoryBurst member */
+    439            DMA_InitStruct->DMA_MemoryBurst = DMA_MemoryBurst_Single;
+    440          
+    441            /* Initialize the DMA_PeripheralBurst member */
+    442            DMA_InitStruct->DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+    443          }
+    444          
+    445          /**
+    446            * @brief  Enables or disables the specified DMAy Streamx.
+    447            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    448            *         to 7 to select the DMA Stream.
+    449            * @param  NewState: new state of the DMAy Streamx. 
+    450            *          This parameter can be: ENABLE or DISABLE.
+    451            *
+    452            * @note  This function may be used to perform Pause-Resume operation. When a
+    453            *        transfer is ongoing, calling this function to disable the Stream will
+    454            *        cause the transfer to be paused. All configuration registers and the
+    455            *        number of remaining data will be preserved. When calling again this
+    456            *        function to re-enable the Stream, the transfer will be resumed from
+    457            *        the point where it was paused.          
+    458            *    
+    459            * @note  After configuring the DMA Stream (DMA_Init() function) and enabling the
+    460            *        stream, it is recommended to check (or wait until) the DMA Stream is
+    461            *        effectively enabled. A Stream may remain disabled if a configuration 
+    462            *        parameter is wrong.
+    463            *        After disabling a DMA Stream, it is also recommended to check (or wait
+    464            *        until) the DMA Stream is effectively disabled. If a Stream is disabled 
+    465            *        while a data transfer is ongoing, the current data will be transferred
+    466            *        and the Stream will be effectively disabled only after the transfer of
+    467            *        this single data is finished.            
+    468            *    
+    469            * @retval None
+    470            */
+    471          void DMA_Cmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState NewState)
+    472          {
+    473            /* Check the parameters */
+    474            //assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    475            //assert(IS_FUNCTIONAL_STATE(NewState));
+    476          
+    477            if (NewState != DISABLE)
+    478            {
+    479              /* Enable the selected DMAy Streamx by setting EN bit */
+    480              DMAy_Streamx->CR |= (uint32_t)DMA_SxCR_EN;
+    481            }
+    482            else
+    483            {
+    484              /* Disable the selected DMAy Streamx by clearing EN bit */
+    485              DMAy_Streamx->CR &= ~(uint32_t)DMA_SxCR_EN;
+    486            }
+    487          }
+    488          
+    489          /**
+    490            * @brief  Configures, when the PINC (Peripheral Increment address mode) bit is
+    491            *         set, if the peripheral address should be incremented with the data 
+    492            *         size (configured with PSIZE bits) or by a fixed offset equal to 4
+    493            *         (32-bit aligned addresses).
+    494            *   
+    495            * @note   This function has no effect if the Peripheral Increment mode is disabled.
+    496            *     
+    497            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    498            *          to 7 to select the DMA Stream.
+    499            * @param  DMA_Pincos: specifies the Peripheral increment offset size.
+    500            *          This parameter can be one of the following values:
+    501            *            @arg DMA_PINCOS_Psize: Peripheral address increment is done  
+    502            *                                   accordingly to PSIZE parameter.
+    503            *            @arg DMA_PINCOS_WordAligned: Peripheral address increment offset is 
+    504            *                                         fixed to 4 (32-bit aligned addresses). 
+    505            * @retval None
+    506            */
+    507          void DMA_PeriphIncOffsetSizeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_Pincos)
+    508          {
+    509            /* Check the parameters */
+    510            //assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    511            //assert(IS_DMA_PINCOS_SIZE(DMA_Pincos));
+    512          
+    513            /* Check the needed Peripheral increment offset */
+    514            if(DMA_Pincos != DMA_PINCOS_Psize)
+    515            {
+    516              /* Configure DMA_SxCR_PINCOS bit with the input parameter */
+    517              DMAy_Streamx->CR |= (uint32_t)DMA_SxCR_PINCOS;     
+    518            }
+    519            else
+    520            {
+    521              /* Clear the PINCOS bit: Peripheral address incremented according to PSIZE */
+    522              DMAy_Streamx->CR &= ~(uint32_t)DMA_SxCR_PINCOS;    
+    523            }
+    524          }
+    525          
+    526          /**
+    527            * @brief  Configures, when the DMAy Streamx is disabled, the flow controller for
+    528            *         the next transactions (Peripheral or Memory).
+    529            *       
+    530            * @note   Before enabling this feature, check if the used peripheral supports 
+    531            *         the Flow Controller mode or not.    
+    532            *  
+    533            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    534            *          to 7 to select the DMA Stream.
+    535            * @param  DMA_FlowCtrl: specifies the DMA flow controller.
+    536            *          This parameter can be one of the following values:
+    537            *            @arg DMA_FlowCtrl_Memory: DMAy_Streamx transactions flow controller is 
+    538            *                                      the DMA controller.
+    539            *            @arg DMA_FlowCtrl_Peripheral: DMAy_Streamx transactions flow controller 
+    540            *                                          is the peripheral.    
+    541            * @retval None
+    542            */
+    543          void DMA_FlowControllerConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FlowCtrl)
+    544          {
+    545            /* Check the parameters */
+    546            //assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    547            //assert(IS_DMA_FLOW_CTRL(DMA_FlowCtrl));
+    548          
+    549            /* Check the needed flow controller  */
+    550            if(DMA_FlowCtrl != DMA_FlowCtrl_Memory)
+    551            {
+    552              /* Configure DMA_SxCR_PFCTRL bit with the input parameter */
+    553              DMAy_Streamx->CR |= (uint32_t)DMA_SxCR_PFCTRL;   
+    554            }
+    555            else
+    556            {
+    557              /* Clear the PFCTRL bit: Memory is the flow controller */
+    558              DMAy_Streamx->CR &= ~(uint32_t)DMA_SxCR_PFCTRL;    
+    559            }
+    560          }
+    561          /**
+    562            * @}
+    563            */
+    564          
+    565          /** @defgroup DMA_Group2 Data Counter functions
+    566           *  @brief   Data Counter functions 
+    567           *
+    568          @verbatim   
+    569           ===============================================================================
+    570                                     Data Counter functions
+    571           ===============================================================================  
+    572          
+    573            This subsection provides function allowing to configure and read the buffer size
+    574            (number of data to be transferred). 
+    575          
+    576            The DMA data counter can be written only when the DMA Stream is disabled 
+    577            (ie. after transfer complete event).
+    578          
+    579            The following function can be used to write the Stream data counter value:
+    580              - void DMA_SetCurrDataCounter(DMA_Stream_TypeDef* DMAy_Streamx, uint16_t Counter);
+    581          
+    582          @note It is advised to use this function rather than DMA_Init() in situations where
+    583                only the Data buffer needs to be reloaded.
+    584          
+    585          @note If the Source and Destination Data Sizes are different, then the value written in
+    586                data counter, expressing the number of transfers, is relative to the number of 
+    587                transfers from the Peripheral point of view.
+    588                ie. If Memory data size is Word, Peripheral data size is Half-Words, then the value
+    589                to be configured in the data counter is the number of Half-Words to be transferred
+    590                from/to the peripheral.
+    591          
+    592            The DMA data counter can be read to indicate the number of remaining transfers for
+    593            the relative DMA Stream. This counter is decremented at the end of each data 
+    594            transfer and when the transfer is complete: 
+    595             - If Normal mode is selected: the counter is set to 0.
+    596             - If Circular mode is selected: the counter is reloaded with the initial value
+    597               (configured before enabling the DMA Stream)
+    598             
+    599            The following function can be used to read the Stream data counter value:
+    600               - uint16_t DMA_GetCurrDataCounter(DMA_Stream_TypeDef* DMAy_Streamx);
+    601          
+    602          @endverbatim
+    603            * @{
+    604            */
+    605          
+    606          /**
+    607            * @brief  Writes the number of data units to be transferred on the DMAy Streamx.
+    608            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    609            *          to 7 to select the DMA Stream.
+    610            * @param  Counter: Number of data units to be transferred (from 0 to 65535) 
+    611            *          Number of data items depends only on the Peripheral data format.
+    612            *            
+    613            * @note   If Peripheral data format is Bytes: number of data units is equal 
+    614            *         to total number of bytes to be transferred.
+    615            *           
+    616            * @note   If Peripheral data format is Half-Word: number of data units is  
+    617            *         equal to total number of bytes to be transferred / 2.
+    618            *           
+    619            * @note   If Peripheral data format is Word: number of data units is equal 
+    620            *         to total  number of bytes to be transferred / 4.
+    621            *      
+    622            * @note   In Memory-to-Memory transfer mode, the memory buffer pointed by 
+    623            *         DMAy_SxPAR register is considered as Peripheral.
+    624            *      
+    625            * @retval The number of remaining data units in the current DMAy Streamx transfer.
+    626            */
+    627          void DMA_SetCurrDataCounter(DMA_Stream_TypeDef* DMAy_Streamx, uint16_t Counter)
+    628          {
+    629            /* Check the parameters */
+    630            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    631          
+    632            /* Write the number of data units to be transferred */
+    633            DMAy_Streamx->NDTR = (uint16_t)Counter;
+    634          }
+    635          
+    636          /**
+    637            * @brief  Returns the number of remaining data units in the current DMAy Streamx transfer.
+    638            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    639            *          to 7 to select the DMA Stream.
+    640            * @retval The number of remaining data units in the current DMAy Streamx transfer.
+    641            */
+    642          uint16_t DMA_GetCurrDataCounter(DMA_Stream_TypeDef* DMAy_Streamx)
+    643          {
+    644            /* Check the parameters */
+    645            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    646          
+    647            /* Return the number of remaining data units for DMAy Streamx */
+    648            return ((uint16_t)(DMAy_Streamx->NDTR));
+    649          }
+    650          /**
+    651            * @}
+    652            */
+    653          
+    654          /** @defgroup DMA_Group3 Double Buffer mode functions
+    655           *  @brief   Double Buffer mode functions 
+    656           *
+    657          @verbatim   
+    658           ===============================================================================
+    659                                   Double Buffer mode functions
+    660           ===============================================================================  
+    661          
+    662            This subsection provides function allowing to configure and control the double 
+    663            buffer mode parameters.
+    664            
+    665            The Double Buffer mode can be used only when Circular mode is enabled.
+    666            The Double Buffer mode cannot be used when transferring data from Memory to Memory.
+    667            
+    668            The Double Buffer mode allows to set two different Memory addresses from/to which
+    669            the DMA controller will access alternatively (after completing transfer to/from target
+    670            memory 0, it will start transfer to/from target memory 1).
+    671            This allows to reduce software overhead for double buffering and reduce the CPU
+    672            access time.
+    673          
+    674            Two functions must be called before calling the DMA_Init() function:
+    675             - void DMA_DoubleBufferModeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t Memory1BaseAddr,
+    676                                          uint32_t DMA_CurrentMemory);
+    677             - void DMA_DoubleBufferModeCmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState NewState);
+    678             
+    679            DMA_DoubleBufferModeConfig() is called to configure the Memory 1 base address and the first
+    680            Memory target from/to which the transfer will start after enabling the DMA Stream.
+    681            Then DMA_DoubleBufferModeCmd() must be called to enable the Double Buffer mode (or disable 
+    682            it when it should not be used).
+    683            
+    684             
+    685            Two functions can be called dynamically when the transfer is ongoing (or when the DMA Stream is 
+    686            stopped) to modify on of the target Memories addresses or to check wich Memory target is currently
+    687             used:
+    688              - void DMA_MemoryTargetConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t MemoryBaseAddr,
+    689                                      uint32_t DMA_MemoryTarget);
+    690              - uint32_t DMA_GetCurrentMemoryTarget(DMA_Stream_TypeDef* DMAy_Streamx);
+    691          
+    692            DMA_MemoryTargetConfig() can be called to modify the base address of one of the two target Memories.
+    693            The Memory of which the base address will be modified must not be currently be used by the DMA Stream
+    694            (ie. if the DMA Stream is currently transferring from Memory 1 then you can only modify base address
+    695            of target Memory 0 and vice versa).
+    696            To check this condition, it is recommended to use the function DMA_GetCurrentMemoryTarget() which
+    697            returns the index of the Memory target currently in use by the DMA Stream.
+    698          
+    699          @endverbatim
+    700            * @{
+    701            */
+    702            
+    703          /**
+    704            * @brief  Configures, when the DMAy Streamx is disabled, the double buffer mode 
+    705            *         and the current memory target.
+    706            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    707            *          to 7 to select the DMA Stream.
+    708            * @param  Memory1BaseAddr: the base address of the second buffer (Memory 1)  
+    709            * @param  DMA_CurrentMemory: specifies which memory will be first buffer for
+    710            *         the transactions when the Stream will be enabled. 
+    711            *          This parameter can be one of the following values:
+    712            *            @arg DMA_Memory_0: Memory 0 is the current buffer.
+    713            *            @arg DMA_Memory_1: Memory 1 is the current buffer.  
+    714            *       
+    715            * @note   Memory0BaseAddr is set by the DMA structure configuration in DMA_Init().
+    716            *   
+    717            * @retval None
+    718            */
+    719          void DMA_DoubleBufferModeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t Memory1BaseAddr,
+    720                                          uint32_t DMA_CurrentMemory)
+    721          {  
+    722            /* Check the parameters */
+    723            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    724            assert(IS_DMA_CURRENT_MEM(DMA_CurrentMemory));
+    725          
+    726            if (DMA_CurrentMemory != DMA_Memory_0)
+    727            {
+    728              /* Set Memory 1 as current memory address */
+    729              DMAy_Streamx->CR |= (uint32_t)(DMA_SxCR_CT);    
+    730            }
+    731            else
+    732            {
+    733              /* Set Memory 0 as current memory address */
+    734              DMAy_Streamx->CR &= ~(uint32_t)(DMA_SxCR_CT);    
+    735            }
+    736          
+    737            /* Write to DMAy Streamx M1AR */
+    738            DMAy_Streamx->M1AR = Memory1BaseAddr;
+    739          }
+    740          
+    741          /**
+    742            * @brief  Enables or disables the double buffer mode for the selected DMA stream.
+    743            * @note   This function can be called only when the DMA Stream is disabled.  
+    744            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    745            *          to 7 to select the DMA Stream.
+    746            * @param  NewState: new state of the DMAy Streamx double buffer mode. 
+    747            *          This parameter can be: ENABLE or DISABLE.
+    748            * @retval None
+    749            */
+    750          void DMA_DoubleBufferModeCmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState NewState)
+    751          {  
+    752            /* Check the parameters */
+    753            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    754            assert(IS_FUNCTIONAL_STATE(NewState));
+    755          
+    756            /* Configure the Double Buffer mode */
+    757            if (NewState != DISABLE)
+    758            {
+    759              /* Enable the Double buffer mode */
+    760              DMAy_Streamx->CR |= (uint32_t)DMA_SxCR_DBM;
+    761            }
+    762            else
+    763            {
+    764              /* Disable the Double buffer mode */
+    765              DMAy_Streamx->CR &= ~(uint32_t)DMA_SxCR_DBM;
+    766            }
+    767          }
+    768          
+    769          /**
+    770            * @brief  Configures the Memory address for the next buffer transfer in double
+    771            *         buffer mode (for dynamic use). This function can be called when the
+    772            *         DMA Stream is enabled and when the transfer is ongoing.  
+    773            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    774            *          to 7 to select the DMA Stream.
+    775            * @param  MemoryBaseAddr: The base address of the target memory buffer
+    776            * @param  DMA_MemoryTarget: Next memory target to be used. 
+    777            *         This parameter can be one of the following values:
+    778            *            @arg DMA_Memory_0: To use the memory address 0
+    779            *            @arg DMA_Memory_1: To use the memory address 1
+    780            * 
+    781            * @note    It is not allowed to modify the Base Address of a target Memory when
+    782            *          this target is involved in the current transfer. ie. If the DMA Stream
+    783            *          is currently transferring to/from Memory 1, then it not possible to
+    784            *          modify Base address of Memory 1, but it is possible to modify Base
+    785            *          address of Memory 0.
+    786            *          To know which Memory is currently used, you can use the function
+    787            *          DMA_GetCurrentMemoryTarget().             
+    788            *  
+    789            * @retval None
+    790            */
+    791          void DMA_MemoryTargetConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t MemoryBaseAddr,
+    792                                     uint32_t DMA_MemoryTarget)
+    793          {
+    794            /* Check the parameters */
+    795            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    796            assert(IS_DMA_CURRENT_MEM(DMA_MemoryTarget));
+    797              
+    798            /* Check the Memory target to be configured */
+    799            if (DMA_MemoryTarget != DMA_Memory_0)
+    800            {
+    801              /* Write to DMAy Streamx M1AR */
+    802              DMAy_Streamx->M1AR = MemoryBaseAddr;    
+    803            }  
+    804            else
+    805            {
+    806              /* Write to DMAy Streamx M0AR */
+    807              DMAy_Streamx->M0AR = MemoryBaseAddr;  
+    808            }
+    809          }
+    810          
+    811          /**
+    812            * @brief  Returns the current memory target used by double buffer transfer.
+    813            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    814            *          to 7 to select the DMA Stream.
+    815            * @retval The memory target number: 0 for Memory0 or 1 for Memory1. 
+    816            */
+    817          uint32_t DMA_GetCurrentMemoryTarget(DMA_Stream_TypeDef* DMAy_Streamx)
+    818          {
+    819            uint32_t tmp = 0;
+    820            
+    821            /* Check the parameters */
+    822            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    823          
+    824            /* Get the current memory target */
+    825            if ((DMAy_Streamx->CR & DMA_SxCR_CT) != 0)
+    826            {
+    827              /* Current memory buffer used is Memory 1 */
+    828              tmp = 1;
+    829            }  
+    830            else
+    831            {
+    832              /* Current memory buffer used is Memory 0 */
+    833              tmp = 0;    
+    834            }
+    835            return tmp;
+    836          }
+    837          /**
+    838            * @}
+    839            */
+    840          
+    841          /** @defgroup DMA_Group4 Interrupts and flags management functions
+    842           *  @brief   Interrupts and flags management functions 
+    843           *
+    844          @verbatim   
+    845           ===============================================================================
+    846                            Interrupts and flags management functions
+    847           ===============================================================================  
+    848          
+    849            This subsection provides functions allowing to
+    850             - Check the DMA enable status
+    851             - Check the FIFO status 
+    852             - Configure the DMA Interrupts sources and check or clear the flags or pending bits status.   
+    853             
+    854           1. DMA Enable status:
+    855             After configuring the DMA Stream (DMA_Init() function) and enabling the stream,
+    856             it is recommended to check (or wait until) the DMA Stream is effectively enabled.
+    857             A Stream may remain disabled if a configuration parameter is wrong.
+    858             After disabling a DMA Stream, it is also recommended to check (or wait until) the DMA
+    859             Stream is effectively disabled. If a Stream is disabled while a data transfer is ongoing, 
+    860             the current data will be transferred and the Stream will be effectively disabled only after
+    861             this data transfer completion.
+    862             To monitor this state it is possible to use the following function:
+    863               - FunctionalState DMA_GetCmdStatus(DMA_Stream_TypeDef* DMAy_Streamx); 
+    864           
+    865           2. FIFO Status:
+    866             It is possible to monitor the FIFO status when a transfer is ongoing using the following 
+    867             function:
+    868               - uint32_t DMA_GetFIFOStatus(DMA_Stream_TypeDef* DMAy_Streamx); 
+    869           
+    870           3. DMA Interrupts and Flags:
+    871            The user should identify which mode will be used in his application to manage the
+    872            DMA controller events: Polling mode or Interrupt mode. 
+    873              
+    874            Polling Mode
+    875            =============
+    876              Each DMA stream can be managed through 4 event Flags:
+    877              (x : DMA Stream number )
+    878                 1. DMA_FLAG_FEIFx  : to indicate that a FIFO Mode Transfer Error event occurred.
+    879                 2. DMA_FLAG_DMEIFx : to indicate that a Direct Mode Transfer Error event occurred.
+    880                 3. DMA_FLAG_TEIFx  : to indicate that a Transfer Error event occurred.
+    881                 4. DMA_FLAG_HTIFx  : to indicate that a Half-Transfer Complete event occurred.
+    882                 5. DMA_FLAG_TCIFx  : to indicate that a Transfer Complete event occurred .       
+    883          
+    884             In this Mode it is advised to use the following functions:
+    885                - FlagStatus DMA_GetFlagStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG);
+    886                - void DMA_ClearFlag(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG);
+    887          
+    888            Interrupt Mode
+    889            ===============
+    890              Each DMA Stream can be managed through 4 Interrupts:
+    891          
+    892              Interrupt Source
+    893              ----------------
+    894                 1. DMA_IT_FEIFx  : specifies the interrupt source for the  FIFO Mode Transfer Error event.
+    895                 2. DMA_IT_DMEIFx : specifies the interrupt source for the Direct Mode Transfer Error event.
+    896                 3. DMA_IT_TEIFx  : specifies the interrupt source for the Transfer Error event.
+    897                 4. DMA_IT_HTIFx  : specifies the interrupt source for the Half-Transfer Complete event.
+    898                 5. DMA_IT_TCIFx  : specifies the interrupt source for the a Transfer Complete event. 
+    899               
+    900            In this Mode it is advised to use the following functions:
+    901               - void DMA_ITConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT, FunctionalState NewState);
+    902               - ITStatus DMA_GetITStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT);
+    903               - void DMA_ClearITPendingBit(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT);
+    904          
+    905          @endverbatim
+    906            * @{
+    907            */
+    908          
+    909          /**
+    910            * @brief  Returns the status of EN bit for the specified DMAy Streamx.
+    911            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    912            *          to 7 to select the DMA Stream.
+    913            *   
+    914            * @note    After configuring the DMA Stream (DMA_Init() function) and enabling
+    915            *          the stream, it is recommended to check (or wait until) the DMA Stream
+    916            *          is effectively enabled. A Stream may remain disabled if a configuration
+    917            *          parameter is wrong.
+    918            *          After disabling a DMA Stream, it is also recommended to check (or wait 
+    919            *          until) the DMA Stream is effectively disabled. If a Stream is disabled
+    920            *          while a data transfer is ongoing, the current data will be transferred
+    921            *          and the Stream will be effectively disabled only after the transfer
+    922            *          of this single data is finished.  
+    923            *      
+    924            * @retval Current state of the DMAy Streamx (ENABLE or DISABLE).
+    925            */
+    926          FunctionalState DMA_GetCmdStatus(DMA_Stream_TypeDef* DMAy_Streamx)
+    927          {
+    928            FunctionalState state = DISABLE;
+    929          
+    930            /* Check the parameters */
+    931            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    932          
+    933            if ((DMAy_Streamx->CR & (uint32_t)DMA_SxCR_EN) != 0)
+    934            {
+    935              /* The selected DMAy Streamx EN bit is set (DMA is still transferring) */
+    936              state = ENABLE;
+    937            }
+    938            else
+    939            {
+    940              /* The selected DMAy Streamx EN bit is cleared (DMA is disabled and 
+    941                  all transfers are complete) */
+    942              state = DISABLE;
+    943            }
+    944            return state;
+    945          }
+    946          
+    947          /**
+    948            * @brief  Returns the current DMAy Streamx FIFO filled level.
+    949            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0 
+    950            *         to 7 to select the DMA Stream.
+    951            * @retval The FIFO filling state.
+    952            *           - DMA_FIFOStatus_Less1QuarterFull: when FIFO is less than 1 quarter-full 
+    953            *                                               and not empty.
+    954            *           - DMA_FIFOStatus_1QuarterFull: if more than 1 quarter-full.
+    955            *           - DMA_FIFOStatus_HalfFull: if more than 1 half-full.
+    956            *           - DMA_FIFOStatus_3QuartersFull: if more than 3 quarters-full.
+    957            *           - DMA_FIFOStatus_Empty: when FIFO is empty
+    958            *           - DMA_FIFOStatus_Full: when FIFO is full
+    959            */
+    960          uint32_t DMA_GetFIFOStatus(DMA_Stream_TypeDef* DMAy_Streamx)
+    961          {
+    962            uint32_t tmpreg = 0;
+    963           
+    964            /* Check the parameters */
+    965            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    966            
+    967            /* Get the FIFO level bits */
+    968            tmpreg = (uint32_t)((DMAy_Streamx->FCR & DMA_SxFCR_FS));
+    969            
+    970            return tmpreg;
+    971          }
+    972          
+    973          /**
+    974            * @brief  Checks whether the specified DMAy Streamx flag is set or not.
+    975            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+    976            *          to 7 to select the DMA Stream.
+    977            * @param  DMA_FLAG: specifies the flag to check.
+    978            *          This parameter can be one of the following values:
+    979            *            @arg DMA_FLAG_TCIFx:  Streamx transfer complete flag
+    980            *            @arg DMA_FLAG_HTIFx:  Streamx half transfer complete flag
+    981            *            @arg DMA_FLAG_TEIFx:  Streamx transfer error flag
+    982            *            @arg DMA_FLAG_DMEIFx: Streamx direct mode error flag
+    983            *            @arg DMA_FLAG_FEIFx:  Streamx FIFO error flag
+    984            *         Where x can be 0 to 7 to select the DMA Stream.
+    985            * @retval The new state of DMA_FLAG (SET or RESET).
+    986            */
+    987          FlagStatus DMA_GetFlagStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG)
+    988          {
+    989            FlagStatus bitstatus = RESET;
+    990            DMA_TypeDef* DMAy;
+    991            uint32_t tmpreg = 0;
+    992          
+    993            /* Check the parameters */
+    994            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+    995            assert(IS_DMA_GET_FLAG(DMA_FLAG));
+    996          
+    997            /* Determine the DMA to which belongs the stream */
+    998            if (DMAy_Streamx < DMA2_Stream0)
+    999            {
+   1000              /* DMAy_Streamx belongs to DMA1 */
+   1001              DMAy = DMA1; 
+   1002            } 
+   1003            else 
+   1004            {
+   1005              /* DMAy_Streamx belongs to DMA2 */
+   1006              DMAy = DMA2; 
+   1007            }
+   1008          
+   1009            /* Check if the flag is in HISR or LISR */
+   1010            if ((DMA_FLAG & HIGH_ISR_MASK) != (uint32_t)RESET)
+   1011            {
+   1012              /* Get DMAy HISR register value */
+   1013              tmpreg = DMAy->HISR;
+   1014            }
+   1015            else
+   1016            {
+   1017              /* Get DMAy LISR register value */
+   1018              tmpreg = DMAy->LISR;
+   1019            }   
+   1020           
+   1021            /* Mask the reserved bits */
+   1022            tmpreg &= (uint32_t)RESERVED_MASK;
+   1023          
+   1024            /* Check the status of the specified DMA flag */
+   1025            if ((tmpreg & DMA_FLAG) != (uint32_t)RESET)
+   1026            {
+   1027              /* DMA_FLAG is set */
+   1028              bitstatus = SET;
+   1029            }
+   1030            else
+   1031            {
+   1032              /* DMA_FLAG is reset */
+   1033              bitstatus = RESET;
+   1034            }
+   1035          
+   1036            /* Return the DMA_FLAG status */
+   1037            return  bitstatus;
+   1038          }
+   1039          
+   1040          /**
+   1041            * @brief  Clears the DMAy Streamx's pending flags.
+   1042            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+   1043            *          to 7 to select the DMA Stream.
+   1044            * @param  DMA_FLAG: specifies the flag to clear.
+   1045            *          This parameter can be any combination of the following values:
+   1046            *            @arg DMA_FLAG_TCIFx:  Streamx transfer complete flag
+   1047            *            @arg DMA_FLAG_HTIFx:  Streamx half transfer complete flag
+   1048            *            @arg DMA_FLAG_TEIFx:  Streamx transfer error flag
+   1049            *            @arg DMA_FLAG_DMEIFx: Streamx direct mode error flag
+   1050            *            @arg DMA_FLAG_FEIFx:  Streamx FIFO error flag
+   1051            *         Where x can be 0 to 7 to select the DMA Stream.   
+   1052            * @retval None
+   1053            */
+   1054          void DMA_ClearFlag(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG)
+   1055          {
+   1056            DMA_TypeDef* DMAy;
+   1057          
+   1058            /* Check the parameters */
+   1059            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+   1060            assert(IS_DMA_CLEAR_FLAG(DMA_FLAG));
+   1061          
+   1062            /* Determine the DMA to which belongs the stream */
+   1063            if (DMAy_Streamx < DMA2_Stream0)
+   1064            {
+   1065              /* DMAy_Streamx belongs to DMA1 */
+   1066              DMAy = DMA1; 
+   1067            } 
+   1068            else 
+   1069            {
+   1070              /* DMAy_Streamx belongs to DMA2 */
+   1071              DMAy = DMA2; 
+   1072            }
+   1073          
+   1074            /* Check if LIFCR or HIFCR register is targeted */
+   1075            if ((DMA_FLAG & HIGH_ISR_MASK) != (uint32_t)RESET)
+   1076            {
+   1077              /* Set DMAy HIFCR register clear flag bits */
+   1078              DMAy->HIFCR = (uint32_t)(DMA_FLAG & RESERVED_MASK);
+   1079            }
+   1080            else 
+   1081            {
+   1082              /* Set DMAy LIFCR register clear flag bits */
+   1083              DMAy->LIFCR = (uint32_t)(DMA_FLAG & RESERVED_MASK);
+   1084            }    
+   1085          }
+   1086          
+   1087          /**
+   1088            * @brief  Enables or disables the specified DMAy Streamx interrupts.
+   1089            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+   1090            *          to 7 to select the DMA Stream.
+   1091            * @param DMA_IT: specifies the DMA interrupt sources to be enabled or disabled. 
+   1092            *          This parameter can be any combination of the following values:
+   1093            *            @arg DMA_IT_TC:  Transfer complete interrupt mask
+   1094            *            @arg DMA_IT_HT:  Half transfer complete interrupt mask
+   1095            *            @arg DMA_IT_TE:  Transfer error interrupt mask
+   1096            *            @arg DMA_IT_FE:  FIFO error interrupt mask
+   1097            * @param  NewState: new state of the specified DMA interrupts.
+   1098            *          This parameter can be: ENABLE or DISABLE.
+   1099            * @retval None
+   1100            */
+   1101          void DMA_ITConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT, FunctionalState NewState)
+   1102          {
+   1103            /* Check the parameters */
+   1104            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+   1105            assert(IS_DMA_CONFIG_IT(DMA_IT));
+   1106            assert(IS_FUNCTIONAL_STATE(NewState));
+   1107          
+   1108            /* Check if the DMA_IT parameter contains a FIFO interrupt */
+   1109            if ((DMA_IT & DMA_IT_FE) != 0)
+   1110            {
+   1111              if (NewState != DISABLE)
+   1112              {
+   1113                /* Enable the selected DMA FIFO interrupts */
+   1114                DMAy_Streamx->FCR |= (uint32_t)DMA_IT_FE;
+   1115              }    
+   1116              else 
+   1117              {
+   1118                /* Disable the selected DMA FIFO interrupts */
+   1119                DMAy_Streamx->FCR &= ~(uint32_t)DMA_IT_FE;  
+   1120              }
+   1121            }
+   1122          
+   1123            /* Check if the DMA_IT parameter contains a Transfer interrupt */
+   1124            if (DMA_IT != DMA_IT_FE)
+   1125            {
+   1126              if (NewState != DISABLE)
+   1127              {
+   1128                /* Enable the selected DMA transfer interrupts */
+   1129                DMAy_Streamx->CR |= (uint32_t)(DMA_IT  & TRANSFER_IT_ENABLE_MASK);
+   1130              }
+   1131              else
+   1132              {
+   1133                /* Disable the selected DMA transfer interrupts */
+   1134                DMAy_Streamx->CR &= ~(uint32_t)(DMA_IT & TRANSFER_IT_ENABLE_MASK);
+   1135              }    
+   1136            }
+   1137          }
+   1138          
+   1139          /**
+   1140            * @brief  Checks whether the specified DMAy Streamx interrupt has occurred or not.
+   1141            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+   1142            *          to 7 to select the DMA Stream.
+   1143            * @param  DMA_IT: specifies the DMA interrupt source to check.
+   1144            *          This parameter can be one of the following values:
+   1145            *            @arg DMA_IT_TCIFx:  Streamx transfer complete interrupt
+   1146            *            @arg DMA_IT_HTIFx:  Streamx half transfer complete interrupt
+   1147            *            @arg DMA_IT_TEIFx:  Streamx transfer error interrupt
+   1148            *            @arg DMA_IT_DMEIFx: Streamx direct mode error interrupt
+   1149            *            @arg DMA_IT_FEIFx:  Streamx FIFO error interrupt
+   1150            *         Where x can be 0 to 7 to select the DMA Stream.
+   1151            * @retval The new state of DMA_IT (SET or RESET).
+   1152            */
+   1153          ITStatus DMA_GetITStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT)
+   1154          {
+   1155            ITStatus bitstatus = RESET;
+   1156            DMA_TypeDef* DMAy;
+   1157            uint32_t tmpreg = 0, enablestatus = 0;
+   1158          
+   1159            /* Check the parameters */
+   1160            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+   1161            assert(IS_DMA_GET_IT(DMA_IT));
+   1162           
+   1163            /* Determine the DMA to which belongs the stream */
+   1164            if (DMAy_Streamx < DMA2_Stream0)
+   1165            {
+   1166              /* DMAy_Streamx belongs to DMA1 */
+   1167              DMAy = DMA1; 
+   1168            } 
+   1169            else 
+   1170            {
+   1171              /* DMAy_Streamx belongs to DMA2 */
+   1172              DMAy = DMA2; 
+   1173            }
+   1174          
+   1175            /* Check if the interrupt enable bit is in the CR or FCR register */
+   1176            if ((DMA_IT & TRANSFER_IT_MASK) != (uint32_t)RESET)
+   1177            {
+   1178              /* Get the interrupt enable position mask in CR register */
+   1179              tmpreg = (uint32_t)((DMA_IT >> 11) & TRANSFER_IT_ENABLE_MASK);   
+   1180              
+   1181              /* Check the enable bit in CR register */
+   1182              enablestatus = (uint32_t)(DMAy_Streamx->CR & tmpreg);
+   1183            }
+   1184            else 
+   1185            {
+   1186              /* Check the enable bit in FCR register */
+   1187              enablestatus = (uint32_t)(DMAy_Streamx->FCR & DMA_IT_FE); 
+   1188            }
+   1189           
+   1190            /* Check if the interrupt pending flag is in LISR or HISR */
+   1191            if ((DMA_IT & HIGH_ISR_MASK) != (uint32_t)RESET)
+   1192            {
+   1193              /* Get DMAy HISR register value */
+   1194              tmpreg = DMAy->HISR ;
+   1195            }
+   1196            else
+   1197            {
+   1198              /* Get DMAy LISR register value */
+   1199              tmpreg = DMAy->LISR ;
+   1200            } 
+   1201          
+   1202            /* mask all reserved bits */
+   1203            tmpreg &= (uint32_t)RESERVED_MASK;
+   1204          
+   1205            /* Check the status of the specified DMA interrupt */
+   1206            if (((tmpreg & DMA_IT) != (uint32_t)RESET) && (enablestatus != (uint32_t)RESET))
+   1207            {
+   1208              /* DMA_IT is set */
+   1209              bitstatus = SET;
+   1210            }
+   1211            else
+   1212            {
+   1213              /* DMA_IT is reset */
+   1214              bitstatus = RESET;
+   1215            }
+   1216          
+   1217            /* Return the DMA_IT status */
+   1218            return  bitstatus;
+   1219          }
+   1220          
+   1221          /**
+   1222            * @brief  Clears the DMAy Streamx's interrupt pending bits.
+   1223            * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
+   1224            *          to 7 to select the DMA Stream.
+   1225            * @param  DMA_IT: specifies the DMA interrupt pending bit to clear.
+   1226            *          This parameter can be any combination of the following values:
+   1227            *            @arg DMA_IT_TCIFx:  Streamx transfer complete interrupt
+   1228            *            @arg DMA_IT_HTIFx:  Streamx half transfer complete interrupt
+   1229            *            @arg DMA_IT_TEIFx:  Streamx transfer error interrupt
+   1230            *            @arg DMA_IT_DMEIFx: Streamx direct mode error interrupt
+   1231            *            @arg DMA_IT_FEIFx:  Streamx FIFO error interrupt
+   1232            *         Where x can be 0 to 7 to select the DMA Stream.
+   1233            * @retval None
+   1234            */
+   1235          void DMA_ClearITPendingBit(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT)
+   1236          {
+   1237            DMA_TypeDef* DMAy;
+   1238          
+   1239            /* Check the parameters */
+   1240            assert(IS_DMA_ALL_PERIPH(DMAy_Streamx));
+   1241            assert(IS_DMA_CLEAR_IT(DMA_IT));
+   1242          
+   1243            /* Determine the DMA to which belongs the stream */
+   1244            if (DMAy_Streamx < DMA2_Stream0)
+   1245            {
+   1246              /* DMAy_Streamx belongs to DMA1 */
+   1247              DMAy = DMA1; 
+   1248            } 
+   1249            else 
+   1250            {
+   1251              /* DMAy_Streamx belongs to DMA2 */
+   1252              DMAy = DMA2; 
+   1253            }
+   1254          
+   1255            /* Check if LIFCR or HIFCR register is targeted */
+   1256            if ((DMA_IT & HIGH_ISR_MASK) != (uint32_t)RESET)
+   1257            {
+   1258              /* Set DMAy HIFCR register clear interrupt bits */
+   1259              DMAy->HIFCR = (uint32_t)(DMA_IT & RESERVED_MASK);
+   1260            }
+   1261            else 
+   1262            {
+   1263              /* Set DMAy LIFCR register clear interrupt bits */
+   1264              DMAy->LIFCR = (uint32_t)(DMA_IT & RESERVED_MASK);
+   1265            }   
+   1266          }
+   1267          
+   1268          /**
+   1269            * @}
+   1270            */
+   1271          
+   1272          /**
+   1273            * @}
+   1274            */
+   1275          
+   1276          /**
+   1277            * @}
+   1278            */
+   1279          
+   1280          /**
+   1281            * @}
+   1282            */
+   1283          
+   1284          /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+     Function                      .cstack
+     --------                      -------
+     DMA_ClearFlag                     16
+     DMA_ClearITPendingBit             16
+     DMA_Cmd                            0
+     DMA_DeInit                         0
+     DMA_DoubleBufferModeCmd           16
+     DMA_DoubleBufferModeConfig        16
+     DMA_FlowControllerConfig           0
+     DMA_GetCmdStatus                  16
+     DMA_GetCurrDataCounter             8
+     DMA_GetCurrentMemoryTarget        16
+     DMA_GetFIFOStatus                 16
+     DMA_GetFlagStatus                 24
+     DMA_GetITStatus                   32
+     DMA_ITConfig                      16
+     DMA_Init                           4
+     DMA_MemoryTargetConfig            16
+     DMA_PeriphIncOffsetSizeConfig      0
+     DMA_SetCurrDataCounter            16
+     DMA_StructInit                     0
+
+
+   Section sizes:
+
+     Function/Label                                 Bytes
+     --------------                                 -----
+     DMA_DeInit                                      348
+     DMA_Init                                         90
+     DMA_StructInit                                   62
+     DMA_Cmd                                          26
+     DMA_PeriphIncOffsetSizeConfig                    24
+     DMA_FlowControllerConfig                         24
+     DMA_SetCurrDataCounter                          160
+     DMA_GetCurrDataCounter                          158
+     DMA_DoubleBufferModeConfig                      212
+     DMA_DoubleBufferModeCmd                         210
+     DMA_MemoryTargetConfig                          162
+     DMA_GetCurrentMemoryTarget                      140
+     DMA_GetCmdStatus                                146
+     DMA_GetFIFOStatus                               136
+     DMA_GetFlagStatus                               564
+     DMA_ClearFlag                                   248
+     DMA_ITConfig                                    282
+     DMA_GetITStatus                                 596
+     DMA_ClearITPendingBit                           204
+     ??DataTable19                                     4
+     ??DataTable19_1                                   4
+     ??DataTable19_2                                   4
+     ??DataTable19_3                                   4
+     ??DataTable19_4                                   4
+     ??DataTable19_5                                   4
+     ??DataTable19_6                                   4
+     ??DataTable19_7                                   4
+     ??DataTable19_8                                   4
+     ??DataTable19_9                                   4
+     ??DataTable19_10                                  4
+     ??DataTable19_11                                  4
+     ??DataTable19_12                                  4
+     ??DataTable19_13                                  4
+     ??DataTable19_14                                  4
+     ??DataTable19_15                                  4
+     ??DataTable19_16                                  4
+     ??DataTable19_17                                  4
+     ??DataTable19_18                                  4
+     ??DataTable19_19                                  4
+     ??DataTable19_20                                  4
+     ??DataTable19_21                                  4
+     ??DataTable19_22                                  4
+     ??DataTable21                                     4
+     ??DataTable22                                     4
+     ??DataTable22_1                                   4
+     ??DataTable23                                     4
+     ??DataTable23_1                                   4
+     ??DataTable23_2                                   4
+     ??DataTable23_3                                   4
+     ??DataTable23_4                                   4
+     ??DataTable23_5                                   4
+     ??DataTable23_6                                   4
+     ??DataTable23_7                                   4
+     ??DataTable23_8                                   4
+     ??DataTable23_9                                   4
+     ??DataTable23_10                                  4
+     ??DataTable23_11                                  4
+     ??DataTable23_12                                  4
+     ??DataTable23_13                                  4
+     ??DataTable23_14                                  4
+     ??DataTable23_15                                  4
+     ??DataTable23_16                                  4
+     ?<Constant "IS_DMA_ALL_PERIPH(DMA...">           32
+     ?<Constant "D:\\work\\\320\320\261\352\262\372  176
+     ?<Constant "IS_DMA_CURRENT_MEM(DM...">           40
+     ?<Constant "IS_DMA_CURRENT_MEM(DM...">_1         40
+     ?<Constant "IS_FUNCTIONAL_STATE(N...">           32
+     ??DataTable24                                     4
+     ??DataTable24_1                                   4
+     ??DataTable24_2                                   4
+     ??DataTable24_3                                   4
+     ??DataTable24_4                                   4
+     ??DataTable24_5                                   4
+     ??DataTable24_6                                   4
+     ??DataTable24_7                                   4
+     ??DataTable24_8                                   4
+     ??DataTable24_9                                   4
+     ??DataTable24_10                                  4
+     ??DataTable24_11                                  4
+     ??DataTable24_12                                  4
+     ??DataTable24_13                                  4
+     ??DataTable24_14                                  4
+     ??DataTable24_15                                  4
+     ??DataTable24_16                                  4
+     ??DataTable24_17                                  4
+     ??DataTable24_18                                  4
+     ??DataTable24_19                                  4
+     ??DataTable24_20                                  4
+     ??DataTable24_21                                  4
+     ??DataTable24_22                                  4
+     ??DataTable24_23                                  4
+     ??DataTable24_24                                  4
+     ??DataTable24_25                                  4
+     ??DataTable24_26                                  4
+     ??DataTable24_27                                  4
+     ??DataTable24_28                                  4
+     ??DataTable24_29                                  4
+     ??DataTable24_30                                  4
+     ??DataTable24_31                                  4
+     ??DataTable24_32                                  4
+     ??DataTable24_33                                  4
+     ??DataTable24_34                                  4
+     ??DataTable24_35                                  4
+     ??DataTable24_36                                  4
+     ??DataTable24_37                                  4
+     ??DataTable24_38                                  4
+     ??DataTable24_39                                  4
+     ??DataTable24_40                                  4
+     ??DataTable24_41                                  4
+     ??DataTable24_42                                  4
+     ??DataTable24_43                                  4
+     ??DataTable24_44                                  4
+     ??DataTable24_45                                  4
+     ??DataTable24_46                                  4
+     ??DataTable24_47                                  4
+     ??DataTable24_48                                  4
+     ??DataTable24_49                                  4
+     ??DataTable24_50                                  4
+     ??DataTable24_51                                  4
+     ??DataTable24_52                                  4
+     ??DataTable24_53                                  4
+     ??DataTable24_54                                  4
+     ??DataTable24_55                                  4
+     ??DataTable24_56                                  4
+     ??DataTable24_57                                  4
+     ??DataTable24_58                                  4
+     ??DataTable24_59                                  4
+     ??DataTable24_60                                  4
+     ??DataTable24_61                                  4
+     ??DataTable24_62                                  4
+     ??DataTable24_63                                  4
+     ??DataTable24_64                                  4
+     ??DataTable24_65                                  4
+     ??DataTable24_66                                  4
+     ??DataTable24_67                                  4
+     ??DataTable24_68                                  4
+     ??DataTable24_69                                  4
+     ??DataTable24_70                                  4
+     ??DataTable24_71                                  4
+     ??DataTable24_72                                  4
+     ??DataTable24_73                                  4
+     ??DataTable24_74                                  4
+     ??DataTable24_75                                  4
+     ??DataTable24_76                                  4
+     ??DataTable24_77                                  4
+     ??DataTable24_78                                  4
+     ??DataTable24_79                                  4
+     ??DataTable24_80                                  4
+     ??DataTable24_81                                  4
+     ??DataTable24_82                                  4
+     ??DataTable24_83                                  4
+     ??DataTable24_84                                  4
+     ??DataTable24_85                                  4
+     ??DataTable24_86                                  4
+     ??DataTable24_87                                  4
+     ??DataTable24_88                                  4
+     ??DataTable24_89                                  4
+     ??DataTable24_90                                  4
+     ??DataTable24_91                                  4
+     ?<Constant "IS_DMA_GET_FLAG(DMA_F...">           28
+     ?<Constant "IS_DMA_CLEAR_FLAG(DMA...">           28
+     ?<Constant "IS_DMA_CONFIG_IT(DMA_IT)">           28
+     ?<Constant "IS_DMA_GET_IT(DMA_IT)">              24
+     ?<Constant "IS_DMA_CLEAR_IT(DMA_IT)">            24
+
+ 
+    80 bytes in section .rodata
+ 4 704 bytes in section .text
+ 
+ 4 704 bytes of CODE  memory
+    80 bytes of CONST memory
+
+Errors: none
+Warnings: none

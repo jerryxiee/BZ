@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>boot/Debug</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>289</Column0><Column1>1</Column1><Column2>27</Column2><Column3>0</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1027</ColumnWidth1><ColumnWidth2>274</ColumnWidth2><ColumnWidth3>68</ColumnWidth3></Build>
+    <TerminalIO/><Find-in-Files><ColumnWidth0>496</ColumnWidth0><ColumnWidth1>70</ColumnWidth1><ColumnWidth2>850</ColumnWidth2></Find-in-Files><Debug-Log><ColumnWidth0>19</ColumnWidth0><ColumnWidth1>1382</ColumnWidth1></Debug-Log><Disassembly><MixedMode>1</MixedMode><CodeCovShow>1</CodeCovShow><InstrProfShow>1</InstrProfShow></Disassembly></Static>
+    <Windows>
+      
+      
+    <Wnd2>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-23083-22470</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>boot</ExpandedNode><ExpandedNode>boot/CMSIS</ExpandedNode><ExpandedNode>boot/Output</ExpandedNode><ExpandedNode>boot/User</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-28687-24821</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-6679-201</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab><Tab><Identity>TabID-13606-22924</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab><Tab><Identity>TabID-24219-1483</Identity><TabName>Breakpoints</TabName><Factory>Breakpoints</Factory></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd3></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\inc\stm32f10x_conf.h</Filename><XPos>0</XPos><YPos>28</YPos><SelStart>1400</SelStart><SelEnd>1400</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\CMSIS\CM3\DeviceSupport\ST\STM32F2xx\stm32f2xx.h</Filename><XPos>0</XPos><YPos>475</YPos><SelStart>21158</SelStart><SelEnd>21158</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\STM32F2xx_StdPeriph_Driver\inc\misc.h</Filename><XPos>0</XPos><YPos>19</YPos><SelStart>1328</SelStart><SelEnd>1328</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\inc\memery.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>169</SelStart><SelEnd>169</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\STM32F2xx_StdPeriph_Driver\src\misc.c</Filename><XPos>0</XPos><YPos>165</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\memery.c</Filename><XPos>0</XPos><YPos>18</YPos><SelStart>1288</SelStart><SelEnd>1288</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\STM32F2xx_StdPeriph_Driver\src\stm32f2xx_flash.c</Filename><XPos>0</XPos><YPos>964</YPos><SelStart>35023</SelStart><SelEnd>35023</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\STM32F2xx_StdPeriph_Driver\inc\stm32f2xx_flash.h</Filename><XPos>0</XPos><YPos>92</YPos><SelStart>4142</SelStart><SelEnd>4142</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\CMSIS\CM3\DeviceSupport\ST\STM32F2xx\startup\iar\startup_stm32f2xx.s</Filename><XPos>0</XPos><YPos>158</YPos><SelStart>12009</SelStart><SelEnd>12009</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\main.c</Filename><XPos>0</XPos><YPos>57</YPos><SelStart>2092</SelStart><SelEnd>2092</SelEnd></Tab><ActiveTab>9</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Debug\List\boot.map</Filename><XPos>0</XPos><YPos>249</YPos><SelStart>17742</SelStart><SelEnd>17742</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\CMSIS\CM3\DeviceSupport\ST\STM32F2xx\system_stm32f2xx.c</Filename><XPos>0</XPos><YPos>57</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\STM32F2xx_StdPeriph_Driver\src\stm32f2xx_tim.c</Filename><XPos>0</XPos><YPos>305</YPos><SelStart>14376</SelStart><SelEnd>14376</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\spi_flash.c</Filename><XPos>0</XPos><YPos>36</YPos><SelStart>3071</SelStart><SelEnd>3093</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\inc\config.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>309</SelStart><SelEnd>309</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\E2prom_25LC320A.c</Filename><XPos>0</XPos><YPos>253</YPos><SelStart>6377</SelStart><SelEnd>6377</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\src\E2prom_25LC320A.h</Filename><XPos>0</XPos><YPos>3</YPos><SelStart>428</SelStart><SelEnd>428</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-00f73fa8><key>iaridepm.enu1</key></Toolbar-00f73fa8></Sizes></Row0></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>351</Bottom><Right>337</Right><x>-2</x><y>-2</y><xscreen>90</xscreen><yscreen>185</yscreen><sizeHorzCX>84586</sizeHorzCX><sizeHorzCY>326279</sizeHorzCY><sizeVertCX>318609</sizeVertCX><sizeVertCY>622575</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>171</Bottom><Right>1066</Right><x>-2</x><y>-2</y><xscreen>1068</xscreen><yscreen>173</yscreen><sizeHorzCX>1003759</sizeHorzCX><sizeHorzCY>305115</sizeHorzCY><sizeVertCX>84586</sizeVertCX><sizeVertCY>326279</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

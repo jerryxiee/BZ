@@ -1,0 +1,1116 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.10.2.52244/W32 for ARM     04/Dec/2013  10:58:10 #
+# Copyright 1999-2010 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\STM32F2xx_StdPeriph_Driver\src\stm32f2xx #
+#                    _fsmc.c                                                  #
+#    Command line =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\STM32F2xx_StdPeriph_Driver\src\stm32f2xx #
+#                    _fsmc.c -D STM32F10X_CL -D USE_STDPERIPH_DRIVER -lcN     #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\ -lb                    #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\ -o                     #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\Obj\ --no_cse --no_unroll    #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --warnings_are_errors --fpu=None --dlib_config        #
+#                    E:\SoftwareInstall\arm\INC\c\DLib_Config_Normal.h -I     #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\inc\ -I                         #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\CMSIS\CM3\CoreSupport\ -I       #
+#                    D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\..\STM32F2xx_StdPeriph_Driver\inc\ #
+#                     -I D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\ #
+#                    改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_13081 #
+#                    5_IAR6.1\STM32_Boot\EWARM\..\CMSIS\CM3\DeviceSupport\ST\ #
+#                    STM32F2xx\ -On --use_c++_inline                          #
+#    List file    =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\List\stm32f2xx_fsmc.lst      #
+#    Object file  =  D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进 #
+#                    型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IA #
+#                    R6.1\STM32_Boot\EWARM\Debug\Obj\stm32f2xx_fsmc.o         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\work\行标产品\改进版一体机\源程序\改进型EGS701-1\改进型EGS701-1\STM32F2xx_Boot_V1.62\STM32F2xx_Boot_130815_IAR6.1\STM32_Boot\STM32F2xx_StdPeriph_Driver\src\stm32f2xx_fsmc.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    stm32f2xx_fsmc.c
+      4            * @author  MCD Application Team
+      5            * @version V1.0.0
+      6            * @date    18-April-2011
+      7           * @brief    This file provides firmware functions to manage the following 
+      8            *          functionalities of the FSMC peripheral:           
+      9            *           - Interface with SRAM, PSRAM, NOR and OneNAND memories
+     10            *           - Interface with NAND memories
+     11            *           - Interface with 16-bit PC Card compatible memories  
+     12            *           - Interrupts and flags management   
+     13            *           
+     14            ******************************************************************************
+     15          
+     16            * @attention
+     17            *
+     18            * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+     19            * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+     20            * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+     21            * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+     22            * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+     23            * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+     24            *
+     25            * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+     26            ******************************************************************************
+     27            */
+     28          
+     29          /* Includes ------------------------------------------------------------------*/
+     30          #include "stm32f2xx_fsmc.h"
+     31          #include "stm32f2xx_rcc.h"
+     32          #include "assert.h"
+     33          /** @addtogroup STM32F2xx_StdPeriph_Driver
+     34            * @{
+     35            */
+     36          
+     37          /** @defgroup FSMC 
+     38            * @brief FSMC driver modules
+     39            * @{
+     40            */ 
+     41          
+     42          /* Private typedef -----------------------------------------------------------*/
+     43          /* Private define ------------------------------------------------------------*/
+     44          
+     45          /* --------------------- FSMC registers bit mask ---------------------------- */
+     46          /* FSMC BCRx Mask */
+     47          #define BCR_MBKEN_SET          ((uint32_t)0x00000001)
+     48          #define BCR_MBKEN_RESET        ((uint32_t)0x000FFFFE)
+     49          #define BCR_FACCEN_SET         ((uint32_t)0x00000040)
+     50          
+     51          /* FSMC PCRx Mask */
+     52          #define PCR_PBKEN_SET          ((uint32_t)0x00000004)
+     53          #define PCR_PBKEN_RESET        ((uint32_t)0x000FFFFB)
+     54          #define PCR_ECCEN_SET          ((uint32_t)0x00000040)
+     55          #define PCR_ECCEN_RESET        ((uint32_t)0x000FFFBF)
+     56          #define PCR_MEMORYTYPE_NAND    ((uint32_t)0x00000008)
+     57          
+     58          /* Private macro -------------------------------------------------------------*/
+     59          /* Private variables ---------------------------------------------------------*/
+     60          /* Private function prototypes -----------------------------------------------*/
+     61          /* Private functions ---------------------------------------------------------*/
+     62          
+     63          /** @defgroup FSMC_Private_Functions
+     64            * @{
+     65            */
+     66          
+     67          /** @defgroup FSMC_Group1 NOR/SRAM Controller functions
+     68           *  @brief   NOR/SRAM Controller functions 
+     69           *
+     70          @verbatim   
+     71           ===============================================================================
+     72                              NOR/SRAM Controller functions
+     73           ===============================================================================  
+     74          
+     75           The following sequence should be followed to configure the FSMC to interface with
+     76           SRAM, PSRAM, NOR or OneNAND memory connected to the NOR/SRAM Bank:
+     77           
+     78             1. Enable the clock for the FSMC and associated GPIOs using the following functions:
+     79                    RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC, ENABLE);
+     80                    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOx, ENABLE);
+     81          
+     82             2. FSMC pins configuration 
+     83                 - Connect the involved FSMC pins to AF12 using the following function 
+     84                    GPIO_PinAFConfig(GPIOx, GPIO_PinSourcex, GPIO_AF_FSMC); 
+     85                 - Configure these FSMC pins in alternate function mode by calling the function
+     86                    GPIO_Init();    
+     87                 
+     88             3. Declare a FSMC_NORSRAMInitTypeDef structure, for example:
+     89                    FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
+     90                and fill the FSMC_NORSRAMInitStructure variable with the allowed values of
+     91                the structure member.
+     92                
+     93             4. Initialize the NOR/SRAM Controller by calling the function
+     94                    FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure); 
+     95          
+     96             5. Then enable the NOR/SRAM Bank, for example:
+     97                    FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM2, ENABLE);  
+     98          
+     99             6. At this stage you can read/write from/to the memory connected to the NOR/SRAM Bank. 
+    100             
+    101          @endverbatim
+    102            * @{
+    103            */
+    104          
+    105          /**
+    106            * @brief  Deinitializes the FSMC NOR/SRAM Banks registers to their default 
+    107            *   reset values.
+    108            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    109            *          This parameter can be one of the following values:
+    110            *            @arg FSMC_Bank1_NORSRAM1: FSMC Bank1 NOR/SRAM1  
+    111            *            @arg FSMC_Bank1_NORSRAM2: FSMC Bank1 NOR/SRAM2 
+    112            *            @arg FSMC_Bank1_NORSRAM3: FSMC Bank1 NOR/SRAM3 
+    113            *            @arg FSMC_Bank1_NORSRAM4: FSMC Bank1 NOR/SRAM4 
+    114            * @retval None
+    115            */
+    116          void FSMC_NORSRAMDeInit(uint32_t FSMC_Bank)
+    117          {
+    118            /* Check the parameter */
+    119            //assert(IS_FSMC_NORSRAM_BANK(FSMC_Bank));
+    120            
+    121            /* FSMC_Bank1_NORSRAM1 */
+    122            if(FSMC_Bank == FSMC_Bank1_NORSRAM1)
+    123            {
+    124              FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030DB;    
+    125            }
+    126            /* FSMC_Bank1_NORSRAM2,  FSMC_Bank1_NORSRAM3 or FSMC_Bank1_NORSRAM4 */
+    127            else
+    128            {   
+    129              FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030D2; 
+    130            }
+    131            FSMC_Bank1->BTCR[FSMC_Bank + 1] = 0x0FFFFFFF;
+    132            FSMC_Bank1E->BWTR[FSMC_Bank] = 0x0FFFFFFF;  
+    133          }
+    134          
+    135          /**
+    136            * @brief  Initializes the FSMC NOR/SRAM Banks according to the specified
+    137            *         parameters in the FSMC_NORSRAMInitStruct.
+    138            * @param  FSMC_NORSRAMInitStruct : pointer to a FSMC_NORSRAMInitTypeDef structure
+    139            *         that contains the configuration information for the FSMC NOR/SRAM 
+    140            *         specified Banks.                       
+    141            * @retval None
+    142            */
+    143          void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
+    144          { 
+    145            /* Check the parameters */
+    146          	/*
+    147            assert(IS_FSMC_NORSRAM_BANK(FSMC_NORSRAMInitStruct->FSMC_Bank));
+    148            assert(IS_FSMC_MUX(FSMC_NORSRAMInitStruct->FSMC_DataAddressMux));
+    149            assert(IS_FSMC_MEMORY(FSMC_NORSRAMInitStruct->FSMC_MemoryType));
+    150            assert(IS_FSMC_MEMORY_WIDTH(FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth));
+    151            assert(IS_FSMC_BURSTMODE(FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode));
+    152            assert(IS_FSMC_ASYNWAIT(FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait));
+    153            assert(IS_FSMC_WAIT_POLARITY(FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity));
+    154            assert(IS_FSMC_WRAP_MODE(FSMC_NORSRAMInitStruct->FSMC_WrapMode));
+    155            assert(IS_FSMC_WAIT_SIGNAL_ACTIVE(FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive));
+    156            assert(IS_FSMC_WRITE_OPERATION(FSMC_NORSRAMInitStruct->FSMC_WriteOperation));
+    157            assert(IS_FSMC_WAITE_SIGNAL(FSMC_NORSRAMInitStruct->FSMC_WaitSignal));
+    158            assert(IS_FSMC_EXTENDED_MODE(FSMC_NORSRAMInitStruct->FSMC_ExtendedMode));
+    159            assert(IS_FSMC_WRITE_BURST(FSMC_NORSRAMInitStruct->FSMC_WriteBurst));  
+    160            assert(IS_FSMC_ADDRESS_SETUP_TIME(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime));
+    161            assert(IS_FSMC_ADDRESS_HOLD_TIME(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime));
+    162            assert(IS_FSMC_DATASETUP_TIME(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataSetupTime));
+    163            assert(IS_FSMC_TURNAROUND_TIME(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration));
+    164            assert(IS_FSMC_CLK_DIV(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision));
+    165            assert(IS_FSMC_DATA_LATENCY(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency));
+    166            assert(IS_FSMC_ACCESS_MODE(FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode)); 
+    167          	*/
+    168            
+    169            /* Bank1 NOR/SRAM control register configuration */ 
+    170            FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] = 
+    171                      (uint32_t)FSMC_NORSRAMInitStruct->FSMC_DataAddressMux |
+    172                      FSMC_NORSRAMInitStruct->FSMC_MemoryType |
+    173                      FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth |
+    174                      FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode |
+    175                      FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait |
+    176                      FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity |
+    177                      FSMC_NORSRAMInitStruct->FSMC_WrapMode |
+    178                      FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive |
+    179                      FSMC_NORSRAMInitStruct->FSMC_WriteOperation |
+    180                      FSMC_NORSRAMInitStruct->FSMC_WaitSignal |
+    181                      FSMC_NORSRAMInitStruct->FSMC_ExtendedMode |
+    182                      FSMC_NORSRAMInitStruct->FSMC_WriteBurst;
+    183            if(FSMC_NORSRAMInitStruct->FSMC_MemoryType == FSMC_MemoryType_NOR)
+    184            {
+    185              FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] |= (uint32_t)BCR_FACCEN_SET;
+    186            }
+    187            /* Bank1 NOR/SRAM timing register configuration */
+    188            FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank+1] = 
+    189                      (uint32_t)FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime |
+    190                      (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime << 4) |
+    191                      (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataSetupTime << 8) |
+    192                      (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration << 16) |
+    193                      (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision << 20) |
+    194                      (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency << 24) |
+    195                       FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode;
+    196                      
+    197              
+    198            /* Bank1 NOR/SRAM timing register for write configuration, if extended mode is used */
+    199            if(FSMC_NORSRAMInitStruct->FSMC_ExtendedMode == FSMC_ExtendedMode_Enable)
+    200            {
+    201          	  /*
+    202              assert(IS_FSMC_ADDRESS_SETUP_TIME(FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime));
+    203              assert(IS_FSMC_ADDRESS_HOLD_TIME(FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime));
+    204              assert(IS_FSMC_DATASETUP_TIME(FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime));
+    205              assert(IS_FSMC_CLK_DIV(FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_CLKDivision));
+    206              assert(IS_FSMC_DATA_LATENCY(FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataLatency));
+    207              assert(IS_FSMC_ACCESS_MODE(FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AccessMode));
+    208          	  */
+    209              FSMC_Bank1E->BWTR[FSMC_NORSRAMInitStruct->FSMC_Bank] = 
+    210                        (uint32_t)FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime |
+    211                        (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime << 4 )|
+    212                        (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime << 8) |
+    213                        (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_CLKDivision << 20) |
+    214                        (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataLatency << 24) |
+    215                         FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AccessMode;
+    216            }
+    217            else
+    218            {
+    219              FSMC_Bank1E->BWTR[FSMC_NORSRAMInitStruct->FSMC_Bank] = 0x0FFFFFFF;
+    220            }
+    221          }
+    222          
+    223          /**
+    224            * @brief  Fills each FSMC_NORSRAMInitStruct member with its default value.
+    225            * @param  FSMC_NORSRAMInitStruct: pointer to a FSMC_NORSRAMInitTypeDef structure 
+    226            *         which will be initialized.
+    227            * @retval None
+    228            */
+    229          void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
+    230          {  
+    231            /* Reset NOR/SRAM Init structure parameters values */
+    232            FSMC_NORSRAMInitStruct->FSMC_Bank = FSMC_Bank1_NORSRAM1;
+    233            FSMC_NORSRAMInitStruct->FSMC_DataAddressMux = FSMC_DataAddressMux_Enable;
+    234            FSMC_NORSRAMInitStruct->FSMC_MemoryType = FSMC_MemoryType_SRAM;
+    235            FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
+    236            FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
+    237            FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
+    238            FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
+    239            FSMC_NORSRAMInitStruct->FSMC_WrapMode = FSMC_WrapMode_Disable;
+    240            FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
+    241            FSMC_NORSRAMInitStruct->FSMC_WriteOperation = FSMC_WriteOperation_Enable;
+    242            FSMC_NORSRAMInitStruct->FSMC_WaitSignal = FSMC_WaitSignal_Enable;
+    243            FSMC_NORSRAMInitStruct->FSMC_ExtendedMode = FSMC_ExtendedMode_Disable;
+    244            FSMC_NORSRAMInitStruct->FSMC_WriteBurst = FSMC_WriteBurst_Disable;
+    245            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime = 0xF;
+    246            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+    247            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataSetupTime = 0xFF;
+    248            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration = 0xF;
+    249            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision = 0xF;
+    250            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency = 0xF;
+    251            FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode = FSMC_AccessMode_A; 
+    252            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime = 0xF;
+    253            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+    254            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime = 0xFF;
+    255            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_BusTurnAroundDuration = 0xF;
+    256            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_CLKDivision = 0xF;
+    257            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataLatency = 0xF;
+    258            FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AccessMode = FSMC_AccessMode_A;
+    259          }
+    260          
+    261          /**
+    262            * @brief  Enables or disables the specified NOR/SRAM Memory Bank.
+    263            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    264            *          This parameter can be one of the following values:
+    265            *            @arg FSMC_Bank1_NORSRAM1: FSMC Bank1 NOR/SRAM1  
+    266            *            @arg FSMC_Bank1_NORSRAM2: FSMC Bank1 NOR/SRAM2 
+    267            *            @arg FSMC_Bank1_NORSRAM3: FSMC Bank1 NOR/SRAM3 
+    268            *            @arg FSMC_Bank1_NORSRAM4: FSMC Bank1 NOR/SRAM4 
+    269            * @param  NewState: new state of the FSMC_Bank. This parameter can be: ENABLE or DISABLE.
+    270            * @retval None
+    271            */
+    272          void FSMC_NORSRAMCmd(uint32_t FSMC_Bank, FunctionalState NewState)
+    273          {
+    274            //assert(IS_FSMC_NORSRAM_BANK(FSMC_Bank));
+    275            //assert(IS_FUNCTIONAL_STATE(NewState));
+    276            
+    277            if (NewState != DISABLE)
+    278            {
+    279              /* Enable the selected NOR/SRAM Bank by setting the PBKEN bit in the BCRx register */
+    280              FSMC_Bank1->BTCR[FSMC_Bank] |= BCR_MBKEN_SET;
+    281            }
+    282            else
+    283            {
+    284              /* Disable the selected NOR/SRAM Bank by clearing the PBKEN bit in the BCRx register */
+    285              FSMC_Bank1->BTCR[FSMC_Bank] &= BCR_MBKEN_RESET;
+    286            }
+    287          }
+    288          /**
+    289            * @}
+    290            */
+    291          
+    292          /** @defgroup FSMC_Group2 NAND Controller functions
+    293           *  @brief   NAND Controller functions 
+    294           *
+    295          @verbatim   
+    296           ===============================================================================
+    297                              NAND Controller functions
+    298           ===============================================================================  
+    299          
+    300           The following sequence should be followed to configure the FSMC to interface with
+    301           8-bit or 16-bit NAND memory connected to the NAND Bank:
+    302           
+    303             1. Enable the clock for the FSMC and associated GPIOs using the following functions:
+    304                    RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC, ENABLE);
+    305                    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOx, ENABLE);
+    306          
+    307             2. FSMC pins configuration 
+    308                 - Connect the involved FSMC pins to AF12 using the following function 
+    309                    GPIO_PinAFConfig(GPIOx, GPIO_PinSourcex, GPIO_AF_FSMC); 
+    310                 - Configure these FSMC pins in alternate function mode by calling the function
+    311                    GPIO_Init();    
+    312                 
+    313             3. Declare a FSMC_NANDInitTypeDef structure, for example:
+    314                    FSMC_NANDInitTypeDef  FSMC_NANDInitStructure;
+    315                and fill the FSMC_NANDInitStructure variable with the allowed values of
+    316                the structure member.
+    317                
+    318             4. Initialize the NAND Controller by calling the function
+    319                    FSMC_NANDInit(&FSMC_NANDInitStructure); 
+    320          
+    321             5. Then enable the NAND Bank, for example:
+    322                    FSMC_NANDCmd(FSMC_Bank3_NAND, ENABLE);  
+    323          
+    324             6. At this stage you can read/write from/to the memory connected to the NAND Bank. 
+    325             
+    326          @note To enable the Error Correction Code (ECC), you have to use the function
+    327                    FSMC_NANDECCCmd(FSMC_Bank3_NAND, ENABLE);  
+    328                and to get the current ECC value you have to use the function
+    329                    ECCval = FSMC_GetECC(FSMC_Bank3_NAND); 
+    330          
+    331          @endverbatim
+    332            * @{
+    333            */
+    334            
+    335          /**
+    336            * @brief  Deinitializes the FSMC NAND Banks registers to their default reset values.
+    337            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    338            *          This parameter can be one of the following values:
+    339            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    340            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND 
+    341            * @retval None
+    342            */
+    343          void FSMC_NANDDeInit(uint32_t FSMC_Bank)
+    344          {
+    345            /* Check the parameter */
+    346            //assert(IS_FSMC_NAND_BANK(FSMC_Bank));
+    347            
+    348            if(FSMC_Bank == FSMC_Bank2_NAND)
+    349            {
+    350              /* Set the FSMC_Bank2 registers to their reset values */
+    351              FSMC_Bank2->PCR2 = 0x00000018;
+    352              FSMC_Bank2->SR2 = 0x00000040;
+    353              FSMC_Bank2->PMEM2 = 0xFCFCFCFC;
+    354              FSMC_Bank2->PATT2 = 0xFCFCFCFC;  
+    355            }
+    356            /* FSMC_Bank3_NAND */  
+    357            else
+    358            {
+    359              /* Set the FSMC_Bank3 registers to their reset values */
+    360              FSMC_Bank3->PCR3 = 0x00000018;
+    361              FSMC_Bank3->SR3 = 0x00000040;
+    362              FSMC_Bank3->PMEM3 = 0xFCFCFCFC;
+    363              FSMC_Bank3->PATT3 = 0xFCFCFCFC; 
+    364            }  
+    365          }
+    366          
+    367          /**
+    368            * @brief  Initializes the FSMC NAND Banks according to the specified parameters
+    369            *         in the FSMC_NANDInitStruct.
+    370            * @param  FSMC_NANDInitStruct : pointer to a FSMC_NANDInitTypeDef structure that
+    371            *         contains the configuration information for the FSMC NAND specified Banks.                       
+    372            * @retval None
+    373            */
+    374          void FSMC_NANDInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
+    375          {
+    376            uint32_t tmppcr = 0x00000000, tmppmem = 0x00000000, tmppatt = 0x00000000; 
+    377              
+    378            /* Check the parameters */
+    379            /*
+    380            assert( IS_FSMC_NAND_BANK(FSMC_NANDInitStruct->FSMC_Bank));
+    381            assert( IS_FSMC_WAIT_FEATURE(FSMC_NANDInitStruct->FSMC_Waitfeature));
+    382            assert( IS_FSMC_MEMORY_WIDTH(FSMC_NANDInitStruct->FSMC_MemoryDataWidth));
+    383            assert( IS_FSMC_ECC_STATE(FSMC_NANDInitStruct->FSMC_ECC));
+    384            assert( IS_FSMC_ECCPAGE_SIZE(FSMC_NANDInitStruct->FSMC_ECCPageSize));
+    385            assert( IS_FSMC_TCLR_TIME(FSMC_NANDInitStruct->FSMC_TCLRSetupTime));
+    386            assert( IS_FSMC_TAR_TIME(FSMC_NANDInitStruct->FSMC_TARSetupTime));
+    387            assert(IS_FSMC_SETUP_TIME(FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime));
+    388            assert(IS_FSMC_WAIT_TIME(FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime));
+    389            assert(IS_FSMC_HOLD_TIME(FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime));
+    390            assert(IS_FSMC_HIZ_TIME(FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime));
+    391            assert(IS_FSMC_SETUP_TIME(FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime));
+    392            assert(IS_FSMC_WAIT_TIME(FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime));
+    393            assert(IS_FSMC_HOLD_TIME(FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime));
+    394            assert(IS_FSMC_HIZ_TIME(FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime));
+    395            */
+    396            /* Set the tmppcr value according to FSMC_NANDInitStruct parameters */
+    397            tmppcr = (uint32_t)FSMC_NANDInitStruct->FSMC_Waitfeature |
+    398                      PCR_MEMORYTYPE_NAND |
+    399                      FSMC_NANDInitStruct->FSMC_MemoryDataWidth |
+    400                      FSMC_NANDInitStruct->FSMC_ECC |
+    401                      FSMC_NANDInitStruct->FSMC_ECCPageSize |
+    402                      (FSMC_NANDInitStruct->FSMC_TCLRSetupTime << 9 )|
+    403                      (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
+    404                      
+    405            /* Set tmppmem value according to FSMC_CommonSpaceTimingStructure parameters */
+    406            tmppmem = (uint32_t)FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime |
+    407                      (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+    408                      (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
+    409                      (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24); 
+    410                      
+    411            /* Set tmppatt value according to FSMC_AttributeSpaceTimingStructure parameters */
+    412            tmppatt = (uint32_t)FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime |
+    413                      (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+    414                      (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
+    415                      (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+    416            
+    417            if(FSMC_NANDInitStruct->FSMC_Bank == FSMC_Bank2_NAND)
+    418            {
+    419              /* FSMC_Bank2_NAND registers configuration */
+    420              FSMC_Bank2->PCR2 = tmppcr;
+    421              FSMC_Bank2->PMEM2 = tmppmem;
+    422              FSMC_Bank2->PATT2 = tmppatt;
+    423            }
+    424            else
+    425            {
+    426              /* FSMC_Bank3_NAND registers configuration */
+    427              FSMC_Bank3->PCR3 = tmppcr;
+    428              FSMC_Bank3->PMEM3 = tmppmem;
+    429              FSMC_Bank3->PATT3 = tmppatt;
+    430            }
+    431          }
+    432          
+    433          
+    434          /**
+    435            * @brief  Fills each FSMC_NANDInitStruct member with its default value.
+    436            * @param  FSMC_NANDInitStruct: pointer to a FSMC_NANDInitTypeDef structure which
+    437            *         will be initialized.
+    438            * @retval None
+    439            */
+    440          void FSMC_NANDStructInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
+    441          { 
+    442            /* Reset NAND Init structure parameters values */
+    443            FSMC_NANDInitStruct->FSMC_Bank = FSMC_Bank2_NAND;
+    444            FSMC_NANDInitStruct->FSMC_Waitfeature = FSMC_Waitfeature_Disable;
+    445            FSMC_NANDInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
+    446            FSMC_NANDInitStruct->FSMC_ECC = FSMC_ECC_Disable;
+    447            FSMC_NANDInitStruct->FSMC_ECCPageSize = FSMC_ECCPageSize_256Bytes;
+    448            FSMC_NANDInitStruct->FSMC_TCLRSetupTime = 0x0;
+    449            FSMC_NANDInitStruct->FSMC_TARSetupTime = 0x0;
+    450            FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+    451            FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+    452            FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+    453            FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
+    454            FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+    455            FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+    456            FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+    457            FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;	  
+    458          }
+    459          
+    460          /**
+    461            * @brief  Enables or disables the specified NAND Memory Bank.
+    462            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    463            *          This parameter can be one of the following values:
+    464            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    465            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    466            * @param  NewState: new state of the FSMC_Bank. This parameter can be: ENABLE or DISABLE.
+    467            * @retval None
+    468            */
+    469          void FSMC_NANDCmd(uint32_t FSMC_Bank, FunctionalState NewState)
+    470          {
+    471            //assert(IS_FSMC_NAND_BANK(FSMC_Bank));
+    472            //assert(IS_FUNCTIONAL_STATE(NewState));
+    473            
+    474            if (NewState != DISABLE)
+    475            {
+    476              /* Enable the selected NAND Bank by setting the PBKEN bit in the PCRx register */
+    477              if(FSMC_Bank == FSMC_Bank2_NAND)
+    478              {
+    479                FSMC_Bank2->PCR2 |= PCR_PBKEN_SET;
+    480              }
+    481              else
+    482              {
+    483                FSMC_Bank3->PCR3 |= PCR_PBKEN_SET;
+    484              }
+    485            }
+    486            else
+    487            {
+    488              /* Disable the selected NAND Bank by clearing the PBKEN bit in the PCRx register */
+    489              if(FSMC_Bank == FSMC_Bank2_NAND)
+    490              {
+    491                FSMC_Bank2->PCR2 &= PCR_PBKEN_RESET;
+    492              }
+    493              else
+    494              {
+    495                FSMC_Bank3->PCR3 &= PCR_PBKEN_RESET;
+    496              }
+    497            }
+    498          }
+    499          /**
+    500            * @brief  Enables or disables the FSMC NAND ECC feature.
+    501            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    502            *          This parameter can be one of the following values:
+    503            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    504            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    505            * @param  NewState: new state of the FSMC NAND ECC feature.  
+    506            *          This parameter can be: ENABLE or DISABLE.
+    507            * @retval None
+    508            */
+    509          void FSMC_NANDECCCmd(uint32_t FSMC_Bank, FunctionalState NewState)
+    510          {
+    511            //assert(IS_FSMC_NAND_BANK(FSMC_Bank));
+    512           // assert(IS_FUNCTIONAL_STATE(NewState));
+    513            
+    514            if (NewState != DISABLE)
+    515            {
+    516              /* Enable the selected NAND Bank ECC function by setting the ECCEN bit in the PCRx register */
+    517              if(FSMC_Bank == FSMC_Bank2_NAND)
+    518              {
+    519                FSMC_Bank2->PCR2 |= PCR_ECCEN_SET;
+    520              }
+    521              else
+    522              {
+    523                FSMC_Bank3->PCR3 |= PCR_ECCEN_SET;
+    524              }
+    525            }
+    526            else
+    527            {
+    528              /* Disable the selected NAND Bank ECC function by clearing the ECCEN bit in the PCRx register */
+    529              if(FSMC_Bank == FSMC_Bank2_NAND)
+    530              {
+    531                FSMC_Bank2->PCR2 &= PCR_ECCEN_RESET;
+    532              }
+    533              else
+    534              {
+    535                FSMC_Bank3->PCR3 &= PCR_ECCEN_RESET;
+    536              }
+    537            }
+    538          }
+    539          
+    540          /**
+    541            * @brief  Returns the error correction code register value.
+    542            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    543            *          This parameter can be one of the following values:
+    544            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    545            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    546            * @retval The Error Correction Code (ECC) value.
+    547            */
+    548          uint32_t FSMC_GetECC(uint32_t FSMC_Bank)
+    549          {
+    550            uint32_t eccval = 0x00000000;
+    551            
+    552            if(FSMC_Bank == FSMC_Bank2_NAND)
+    553            {
+    554              /* Get the ECCR2 register value */
+    555              eccval = FSMC_Bank2->ECCR2;
+    556            }
+    557            else
+    558            {
+    559              /* Get the ECCR3 register value */
+    560              eccval = FSMC_Bank3->ECCR3;
+    561            }
+    562            /* Return the error correction code value */
+    563            return(eccval);
+    564          }
+    565          /**
+    566            * @}
+    567            */
+    568          
+    569          /** @defgroup FSMC_Group3 PCCARD Controller functions
+    570           *  @brief   PCCARD Controller functions 
+    571           *
+    572          @verbatim   
+    573           ===============================================================================
+    574                              PCCARD Controller functions
+    575           ===============================================================================  
+    576          
+    577           The following sequence should be followed to configure the FSMC to interface with
+    578           16-bit PC Card compatible memory connected to the PCCARD Bank:
+    579           
+    580             1. Enable the clock for the FSMC and associated GPIOs using the following functions:
+    581                    RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC, ENABLE);
+    582                    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOx, ENABLE);
+    583          
+    584             2. FSMC pins configuration 
+    585                 - Connect the involved FSMC pins to AF12 using the following function 
+    586                    GPIO_PinAFConfig(GPIOx, GPIO_PinSourcex, GPIO_AF_FSMC); 
+    587                 - Configure these FSMC pins in alternate function mode by calling the function
+    588                    GPIO_Init();    
+    589                 
+    590             3. Declare a FSMC_PCCARDInitTypeDef structure, for example:
+    591                    FSMC_PCCARDInitTypeDef  FSMC_PCCARDInitStructure;
+    592                and fill the FSMC_PCCARDInitStructure variable with the allowed values of
+    593                the structure member.
+    594                
+    595             4. Initialize the PCCARD Controller by calling the function
+    596                    FSMC_PCCARDInit(&FSMC_PCCARDInitStructure); 
+    597          
+    598             5. Then enable the PCCARD Bank:
+    599                    FSMC_PCCARDCmd(ENABLE);  
+    600          
+    601             6. At this stage you can read/write from/to the memory connected to the PCCARD Bank. 
+    602           
+    603          @endverbatim
+    604            * @{
+    605            */
+    606          
+    607          /**
+    608            * @brief  Deinitializes the FSMC PCCARD Bank registers to their default reset values.
+    609            * @param  None                       
+    610            * @retval None
+    611            */
+    612          void FSMC_PCCARDDeInit(void)
+    613          {
+    614            /* Set the FSMC_Bank4 registers to their reset values */
+    615            FSMC_Bank4->PCR4 = 0x00000018; 
+    616            FSMC_Bank4->SR4 = 0x00000000;	
+    617            FSMC_Bank4->PMEM4 = 0xFCFCFCFC;
+    618            FSMC_Bank4->PATT4 = 0xFCFCFCFC;
+    619            FSMC_Bank4->PIO4 = 0xFCFCFCFC;
+    620          }
+    621          
+    622          /**
+    623            * @brief  Initializes the FSMC PCCARD Bank according to the specified parameters
+    624            *         in the FSMC_PCCARDInitStruct.
+    625            * @param  FSMC_PCCARDInitStruct : pointer to a FSMC_PCCARDInitTypeDef structure
+    626            *         that contains the configuration information for the FSMC PCCARD Bank.                       
+    627            * @retval None
+    628            */
+    629          void FSMC_PCCARDInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
+    630          {
+    631            /* Check the parameters */
+    632          	/*
+    633            assert(IS_FSMC_WAIT_FEATURE(FSMC_PCCARDInitStruct->FSMC_Waitfeature));
+    634            assert(IS_FSMC_TCLR_TIME(FSMC_PCCARDInitStruct->FSMC_TCLRSetupTime));
+    635            assert(IS_FSMC_TAR_TIME(FSMC_PCCARDInitStruct->FSMC_TARSetupTime));
+    636           
+    637            assert(IS_FSMC_SETUP_TIME(FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime));
+    638            assert(IS_FSMC_WAIT_TIME(FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime));
+    639            assert(IS_FSMC_HOLD_TIME(FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime));
+    640            assert(IS_FSMC_HIZ_TIME(FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime));
+    641            
+    642            assert(IS_FSMC_SETUP_TIME(FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime));
+    643            assert(IS_FSMC_WAIT_TIME(FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime));
+    644            assert(IS_FSMC_HOLD_TIME(FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime));
+    645            assert(IS_FSMC_HIZ_TIME(FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime));
+    646            assert(IS_FSMC_SETUP_TIME(FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_SetupTime));
+    647            assert(IS_FSMC_WAIT_TIME(FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_WaitSetupTime));
+    648            assert(IS_FSMC_HOLD_TIME(FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HoldSetupTime));
+    649            assert(IS_FSMC_HIZ_TIME(FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HiZSetupTime));
+    650            */
+    651            /* Set the PCR4 register value according to FSMC_PCCARDInitStruct parameters */
+    652            FSMC_Bank4->PCR4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_Waitfeature |
+    653                               FSMC_MemoryDataWidth_16b |  
+    654                               (FSMC_PCCARDInitStruct->FSMC_TCLRSetupTime << 9) |
+    655                               (FSMC_PCCARDInitStruct->FSMC_TARSetupTime << 13);
+    656                      
+    657            /* Set PMEM4 register value according to FSMC_CommonSpaceTimingStructure parameters */
+    658            FSMC_Bank4->PMEM4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime |
+    659                                (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+    660                                (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
+    661                                (FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24); 
+    662                      
+    663            /* Set PATT4 register value according to FSMC_AttributeSpaceTimingStructure parameters */
+    664            FSMC_Bank4->PATT4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime |
+    665                                (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+    666                                (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
+    667                                (FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);	
+    668                      
+    669            /* Set PIO4 register value according to FSMC_IOSpaceTimingStructure parameters */
+    670            FSMC_Bank4->PIO4 = (uint32_t)FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_SetupTime |
+    671                               (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+    672                               (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HoldSetupTime << 16)|
+    673                               (FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HiZSetupTime << 24);             
+    674          }
+    675          
+    676          /**
+    677            * @brief  Fills each FSMC_PCCARDInitStruct member with its default value.
+    678            * @param  FSMC_PCCARDInitStruct: pointer to a FSMC_PCCARDInitTypeDef structure
+    679            *         which will be initialized.
+    680            * @retval None
+    681            */
+    682          void FSMC_PCCARDStructInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
+    683          {
+    684            /* Reset PCCARD Init structure parameters values */
+    685            FSMC_PCCARDInitStruct->FSMC_Waitfeature = FSMC_Waitfeature_Disable;
+    686            FSMC_PCCARDInitStruct->FSMC_TCLRSetupTime = 0x0;
+    687            FSMC_PCCARDInitStruct->FSMC_TARSetupTime = 0x0;
+    688            FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+    689            FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+    690            FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+    691            FSMC_PCCARDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
+    692            FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+    693            FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+    694            FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+    695            FSMC_PCCARDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;	
+    696            FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+    697            FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+    698            FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+    699            FSMC_PCCARDInitStruct->FSMC_IOSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
+    700          }
+    701          
+    702          /**
+    703            * @brief  Enables or disables the PCCARD Memory Bank.
+    704            * @param  NewState: new state of the PCCARD Memory Bank.  
+    705            *          This parameter can be: ENABLE or DISABLE.
+    706            * @retval None
+    707            */
+    708          void FSMC_PCCARDCmd(FunctionalState NewState)
+    709          {
+    710            //assert(IS_FUNCTIONAL_STATE(NewState));
+    711            
+    712            if (NewState != DISABLE)
+    713            {
+    714              /* Enable the PCCARD Bank by setting the PBKEN bit in the PCR4 register */
+    715              FSMC_Bank4->PCR4 |= PCR_PBKEN_SET;
+    716            }
+    717            else
+    718            {
+    719              /* Disable the PCCARD Bank by clearing the PBKEN bit in the PCR4 register */
+    720              FSMC_Bank4->PCR4 &= PCR_PBKEN_RESET;
+    721            }
+    722          }
+    723          /**
+    724            * @}
+    725            */
+    726          
+    727          /** @defgroup FSMC_Group4  Interrupts and flags management functions
+    728           *  @brief    Interrupts and flags management functions
+    729           *
+    730          @verbatim   
+    731           ===============================================================================
+    732                               Interrupts and flags management functions
+    733           ===============================================================================  
+    734          
+    735          @endverbatim
+    736            * @{
+    737            */
+    738          
+    739          /**
+    740            * @brief  Enables or disables the specified FSMC interrupts.
+    741            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    742            *          This parameter can be one of the following values:
+    743            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    744            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    745            *            @arg FSMC_Bank4_PCCARD: FSMC Bank4 PCCARD
+    746            * @param  FSMC_IT: specifies the FSMC interrupt sources to be enabled or disabled.
+    747            *          This parameter can be any combination of the following values:
+    748            *            @arg FSMC_IT_RisingEdge: Rising edge detection interrupt. 
+    749            *            @arg FSMC_IT_Level: Level edge detection interrupt.
+    750            *            @arg FSMC_IT_FallingEdge: Falling edge detection interrupt.
+    751            * @param  NewState: new state of the specified FSMC interrupts.
+    752            *          This parameter can be: ENABLE or DISABLE.
+    753            * @retval None
+    754            */
+    755          void FSMC_ITConfig(uint32_t FSMC_Bank, uint32_t FSMC_IT, FunctionalState NewState)
+    756          {
+    757            //assert(IS_FSMC_IT_BANK(FSMC_Bank));
+    758            //assert(IS_FSMC_IT(FSMC_IT));	
+    759            //assert(IS_FUNCTIONAL_STATE(NewState));
+    760            
+    761            if (NewState != DISABLE)
+    762            {
+    763              /* Enable the selected FSMC_Bank2 interrupts */
+    764              if(FSMC_Bank == FSMC_Bank2_NAND)
+    765              {
+    766                FSMC_Bank2->SR2 |= FSMC_IT;
+    767              }
+    768              /* Enable the selected FSMC_Bank3 interrupts */
+    769              else if (FSMC_Bank == FSMC_Bank3_NAND)
+    770              {
+    771                FSMC_Bank3->SR3 |= FSMC_IT;
+    772              }
+    773              /* Enable the selected FSMC_Bank4 interrupts */
+    774              else
+    775              {
+    776                FSMC_Bank4->SR4 |= FSMC_IT;    
+    777              }
+    778            }
+    779            else
+    780            {
+    781              /* Disable the selected FSMC_Bank2 interrupts */
+    782              if(FSMC_Bank == FSMC_Bank2_NAND)
+    783              {
+    784                
+    785                FSMC_Bank2->SR2 &= (uint32_t)~FSMC_IT;
+    786              }
+    787              /* Disable the selected FSMC_Bank3 interrupts */
+    788              else if (FSMC_Bank == FSMC_Bank3_NAND)
+    789              {
+    790                FSMC_Bank3->SR3 &= (uint32_t)~FSMC_IT;
+    791              }
+    792              /* Disable the selected FSMC_Bank4 interrupts */
+    793              else
+    794              {
+    795                FSMC_Bank4->SR4 &= (uint32_t)~FSMC_IT;    
+    796              }
+    797            }
+    798          }
+    799          
+    800          /**
+    801            * @brief  Checks whether the specified FSMC flag is set or not.
+    802            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    803            *          This parameter can be one of the following values:
+    804            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    805            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    806            *            @arg FSMC_Bank4_PCCARD: FSMC Bank4 PCCARD
+    807            * @param  FSMC_FLAG: specifies the flag to check.
+    808            *          This parameter can be one of the following values:
+    809            *            @arg FSMC_FLAG_RisingEdge: Rising edge detection Flag.
+    810            *            @arg FSMC_FLAG_Level: Level detection Flag.
+    811            *            @arg FSMC_FLAG_FallingEdge: Falling edge detection Flag.
+    812            *            @arg FSMC_FLAG_FEMPT: Fifo empty Flag. 
+    813            * @retval The new state of FSMC_FLAG (SET or RESET).
+    814            */
+    815          FlagStatus FSMC_GetFlagStatus(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
+    816          {
+    817            FlagStatus bitstatus = RESET;
+    818            uint32_t tmpsr = 0x00000000;
+    819            
+    820            /* Check the parameters */
+    821            //assert(IS_FSMC_GETFLAG_BANK(FSMC_Bank));
+    822            //assert(IS_FSMC_GET_FLAG(FSMC_FLAG));
+    823            
+    824            if(FSMC_Bank == FSMC_Bank2_NAND)
+    825            {
+    826              tmpsr = FSMC_Bank2->SR2;
+    827            }  
+    828            else if(FSMC_Bank == FSMC_Bank3_NAND)
+    829            {
+    830              tmpsr = FSMC_Bank3->SR3;
+    831            }
+    832            /* FSMC_Bank4_PCCARD*/
+    833            else
+    834            {
+    835              tmpsr = FSMC_Bank4->SR4;
+    836            } 
+    837            
+    838            /* Get the flag status */
+    839            if ((tmpsr & FSMC_FLAG) != (uint16_t)RESET )
+    840            {
+    841              bitstatus = SET;
+    842            }
+    843            else
+    844            {
+    845              bitstatus = RESET;
+    846            }
+    847            /* Return the flag status */
+    848            return bitstatus;
+    849          }
+    850          
+    851          /**
+    852            * @brief  Clears the FSMC's pending flags.
+    853            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    854            *          This parameter can be one of the following values:
+    855            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    856            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    857            *            @arg FSMC_Bank4_PCCARD: FSMC Bank4 PCCARD
+    858            * @param  FSMC_FLAG: specifies the flag to clear.
+    859            *          This parameter can be any combination of the following values:
+    860            *            @arg FSMC_FLAG_RisingEdge: Rising edge detection Flag.
+    861            *            @arg FSMC_FLAG_Level: Level detection Flag.
+    862            *            @arg FSMC_FLAG_FallingEdge: Falling edge detection Flag.
+    863            * @retval None
+    864            */
+    865          void FSMC_ClearFlag(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
+    866          {
+    867           /* Check the parameters */
+    868            //assert(IS_FSMC_GETFLAG_BANK(FSMC_Bank));
+    869            //assert(IS_FSMC_CLEAR_FLAG(FSMC_FLAG)) ;
+    870              
+    871            if(FSMC_Bank == FSMC_Bank2_NAND)
+    872            {
+    873              FSMC_Bank2->SR2 &= ~FSMC_FLAG; 
+    874            }  
+    875            else if(FSMC_Bank == FSMC_Bank3_NAND)
+    876            {
+    877              FSMC_Bank3->SR3 &= ~FSMC_FLAG;
+    878            }
+    879            /* FSMC_Bank4_PCCARD*/
+    880            else
+    881            {
+    882              FSMC_Bank4->SR4 &= ~FSMC_FLAG;
+    883            }
+    884          }
+    885          
+    886          /**
+    887            * @brief  Checks whether the specified FSMC interrupt has occurred or not.
+    888            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    889            *          This parameter can be one of the following values:
+    890            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    891            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    892            *            @arg FSMC_Bank4_PCCARD: FSMC Bank4 PCCARD
+    893            * @param  FSMC_IT: specifies the FSMC interrupt source to check.
+    894            *          This parameter can be one of the following values:
+    895            *            @arg FSMC_IT_RisingEdge: Rising edge detection interrupt. 
+    896            *            @arg FSMC_IT_Level: Level edge detection interrupt.
+    897            *            @arg FSMC_IT_FallingEdge: Falling edge detection interrupt. 
+    898            * @retval The new state of FSMC_IT (SET or RESET).
+    899            */
+    900          ITStatus FSMC_GetITStatus(uint32_t FSMC_Bank, uint32_t FSMC_IT)
+    901          {
+    902            ITStatus bitstatus = RESET;
+    903            uint32_t tmpsr = 0x0, itstatus = 0x0, itenable = 0x0; 
+    904            
+    905            /* Check the parameters */
+    906            //assert(IS_FSMC_IT_BANK(FSMC_Bank));
+    907            //assert(IS_FSMC_GET_IT(FSMC_IT));
+    908            
+    909            if(FSMC_Bank == FSMC_Bank2_NAND)
+    910            {
+    911              tmpsr = FSMC_Bank2->SR2;
+    912            }  
+    913            else if(FSMC_Bank == FSMC_Bank3_NAND)
+    914            {
+    915              tmpsr = FSMC_Bank3->SR3;
+    916            }
+    917            /* FSMC_Bank4_PCCARD*/
+    918            else
+    919            {
+    920              tmpsr = FSMC_Bank4->SR4;
+    921            } 
+    922            
+    923            itstatus = tmpsr & FSMC_IT;
+    924            
+    925            itenable = tmpsr & (FSMC_IT >> 3);
+    926            if ((itstatus != (uint32_t)RESET)  && (itenable != (uint32_t)RESET))
+    927            {
+    928              bitstatus = SET;
+    929            }
+    930            else
+    931            {
+    932              bitstatus = RESET;
+    933            }
+    934            return bitstatus; 
+    935          }
+    936          
+    937          /**
+    938            * @brief  Clears the FSMC's interrupt pending bits.
+    939            * @param  FSMC_Bank: specifies the FSMC Bank to be used
+    940            *          This parameter can be one of the following values:
+    941            *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
+    942            *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
+    943            *            @arg FSMC_Bank4_PCCARD: FSMC Bank4 PCCARD
+    944            * @param  FSMC_IT: specifies the interrupt pending bit to clear.
+    945            *          This parameter can be any combination of the following values:
+    946            *            @arg FSMC_IT_RisingEdge: Rising edge detection interrupt. 
+    947            *            @arg FSMC_IT_Level: Level edge detection interrupt.
+    948            *            @arg FSMC_IT_FallingEdge: Falling edge detection interrupt.
+    949            * @retval None
+    950            */
+    951          void FSMC_ClearITPendingBit(uint32_t FSMC_Bank, uint32_t FSMC_IT)
+    952          {
+    953            /* Check the parameters */
+    954            //assert(IS_FSMC_IT_BANK(FSMC_Bank));
+    955            ///assert(IS_FSMC_IT(FSMC_IT));
+    956              
+    957            if(FSMC_Bank == FSMC_Bank2_NAND)
+    958            {
+    959              FSMC_Bank2->SR2 &= ~(FSMC_IT >> 3); 
+    960            }  
+    961            else if(FSMC_Bank == FSMC_Bank3_NAND)
+    962            {
+    963              FSMC_Bank3->SR3 &= ~(FSMC_IT >> 3);
+    964            }
+    965            /* FSMC_Bank4_PCCARD*/
+    966            else
+    967            {
+    968              FSMC_Bank4->SR4 &= ~(FSMC_IT >> 3);
+    969            }
+    970          }
+    971          
+    972          /**
+    973            * @}
+    974            */ 
+    975          
+    976          /**
+    977            * @}
+    978            */ 
+    979          
+    980          /**
+    981            * @}
+    982            */
+    983          
+    984          /**
+    985            * @}
+    986            */
+    987          
+    988          /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+     Function               .cstack
+     --------               -------
+     FSMC_ClearFlag              0
+     FSMC_ClearITPendingBit      4
+     FSMC_GetECC                 0
+     FSMC_GetFlagStatus          4
+     FSMC_GetITStatus           12
+     FSMC_ITConfig               4
+     FSMC_NANDCmd                0
+     FSMC_NANDDeInit             0
+     FSMC_NANDECCCmd             0
+     FSMC_NANDInit               8
+     FSMC_NANDStructInit         0
+     FSMC_NORSRAMCmd             0
+     FSMC_NORSRAMDeInit          0
+     FSMC_NORSRAMInit            0
+     FSMC_NORSRAMStructInit      0
+     FSMC_PCCARDCmd              0
+     FSMC_PCCARDDeInit           0
+     FSMC_PCCARDInit             0
+     FSMC_PCCARDStructInit       0
+
+
+   Section sizes:
+
+     Function/Label         Bytes
+     --------------         -----
+     FSMC_NORSRAMDeInit       56
+     FSMC_NORSRAMInit        224
+     FSMC_NORSRAMStructInit  142
+     FSMC_NORSRAMCmd          52
+     FSMC_NANDDeInit          80
+     FSMC_NANDInit           148
+     FSMC_NANDStructInit      78
+     FSMC_NANDCmd             84
+     FSMC_NANDECCCmd          70
+     FSMC_GetECC              24
+     FSMC_PCCARDDeInit        38
+     FSMC_PCCARDInit         120
+     FSMC_PCCARDStructInit    86
+     FSMC_PCCARDCmd           34
+     FSMC_ITConfig           106
+     FSMC_GetFlagStatus       62
+     FSMC_ClearFlag           48
+     FSMC_GetITStatus         82
+     FSMC_ClearITPendingBit   82
+     ??DataTable15             4
+     ??DataTable15_1           4
+     ??DataTable15_2           4
+     ??DataTable15_3           4
+     ??DataTable15_4           4
+     ??DataTable15_5           4
+     ??DataTable15_6           4
+     ??DataTable15_7           4
+     ??DataTable15_8           4
+     ??DataTable15_9           4
+     ??DataTable15_10          4
+     ??DataTable15_11          4
+     ??DataTable15_12          4
+     ??DataTable15_13          4
+     ??DataTable15_14          4
+     ??DataTable15_15          4
+     ??DataTable15_16          4
+     ??DataTable15_17          4
+     ??DataTable15_18          4
+
+ 
+ 1 692 bytes in section .text
+ 
+ 1 692 bytes of CODE memory
+
+Errors: none
+Warnings: none
